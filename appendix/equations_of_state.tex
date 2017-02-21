@@ -1,0 +1,16 @@
+The simulation software GADGET-2 ships with two possible equations of state,
+\begin{itemize}
+\item isothermal, with $\gamma_{eff} = 1$,
+\item default, ideal gas, with $\gamma_{eff} = 5/3$.
+\end{itemize}
+The effective equation of state uncovered in this work differs substaitonally from both of these, it has both a constant entropy $S$ (where $p = S\rho_g^{\gamma_{eff}}$), and a different value of $\gamma_{eff} = 5/4$.
+
+To implement a custom equation of state, the entropy of the SPH (smoothed particle hydrodynamics) particles must be modified.
+If one naievely attempts to interact with the pressure of the gas directly, this leads to the temperature of the particles being modified spuriously/
+The entropy of each particle ({\tt SphP.Entropy}) is set to
+$$
+4.5\left(\frac{f}{F}\right)^{{3/2}} G^{{3/4}} P_{fin}^{{1/2}} \fgas^{-1}
+$$
+with $\fgas$ being treated as a global parameter in this case.
+The entropy differential ({\tt SphP.DtEntropy}) is set to 0, to ensure the temperature of the gas remains constant.
+This modification can be found in the commit {\tt b5141ea} of InterstellarGadget.
