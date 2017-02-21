@@ -1,0 +1,26 @@
+\section{Simulations}\label{app:sims}
+
+For this work, a modified version of the GADGET-2 simulation code \citep{springel_cosmological_2005} was
+used\footnote{This code is available at
+  \url{https://github.com/JBorrow/InterStellarGadget}}. This code has a fixed
+NFW profile potential, reducing issues with large mass dark matter
+particles or a large amount of slowdown due to unnecessary gravity
+calculations. This was implemented by adding an acceleration term in the
+gravity tree portion of Gadget.
+
+Simulations also require initial conditions. For this work, a custom
+generator\footnote{Available at \url{https://github.com/JBorrow/GoGoGadget}}
+was used, which is described above in Appendix \ref{app:gen}. This generates exponential disks for the stellar and gaseous
+disks with the density profile
+
+\begin{equation}
+\rho \propto \exp\left(-\frac{r}{R}\right)\rm{sech}^2\left(\frac{z}{Z}\right)~,
+\end{equation}
+which are summarised in \citet{ferriere_interstellar_2001}.
+
+The simulations in this work have configuration files that are
+available on GitHub\footnote{Obviously, I will make these available once the work is complete.} and were simulated on the
+Hamilton HPC service at Durham University. Datasets are not made
+available due to their prohibitive size, however some moves are
+available in the aforementioned repository.
+

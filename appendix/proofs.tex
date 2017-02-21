@@ -1,0 +1,98 @@
+\section{Proofs}\label{app:proofs}
+
+\subsection{$p_T = F \dot{\Sigma}_*\left(\frac{P_{fin}}{m_*}\right)$}\label{proof-of-p_t-f-dotsigma_leftfracp_finm_right}
+
+This equation is rather complicated at a first glance; why should this
+be the case? One can consider dimensional grounds:
+\[
+    [p_T] = \frac{[M][L]}{[T]^2[L]^2}~,
+\]
+\[
+    [\dot{\Sigma}_*] = \frac{[M]}{[L]^2[T]}~,
+\]
+\[
+    \left[\frac{P_{fin}}{m_*}\right] = \frac{[L]}{[T]}~,
+\]
+from which it is obvious that the `units match' and there must just be
+some numerical factor \(F\) that `makes it work'. However, this is not a
+satisfactory `proof', and some conceptual insight would be helpful so
+that we can consider where this equation is appropriate.
+
+Under normal conditions, at least in disk galaxies, one would assume
+that the supernova rate (here \(\dot{\Sigma}_s\)) is simply proportional
+to the star formation rate (i.e.~stars that die are replaced by an equal
+number of stars over time)\footnote{note that this corresponds to a rate
+of change of surface density of each respective variable}.
+\[
+    \dot{\Sigma}_s = K_1 \dot{\Sigma}_*~.
+\]
+To deal with the fact that this is a surface density, instead of a
+surface number density, we will set
+\[
+    m_s = K_2 m_*~,
+\]
+and hence
+\[
+    \dot{\Sigma}_{s, ~num. ~density} = \frac{K_1}{K_2} \dot{\Sigma}_*~.
+\]
+If each supernova injects \(P_{fin}\) of momentum, then the rate of
+momentum injection (i.e.~a force) by \(n\) supernovae is (up to an
+efficiency factor \(K_3\))
+\[
+    F = K_3\dot{n}P_{fin}~,
+\]
+Now, using the above surface number density, we can retrieve an effective
+pressure:
+\[
+    p_T = \frac{K_1 K_3}{K_2} \dot{\Sigma}_* \left(\frac{P_{fin}}{m_*}\right)~,
+\]
+which recovers Marizzi's result. The issue here is that \citet{martizzi_supernova_2016}
+argues that the factor,
+\[
+    F = \frac{K_1 K_3}{K_2}~,
+\]
+is of order unity. Is this reasonable? Let us examine:
+\[
+    F = \frac{(\mathrm{SFR ~to ~SNR}) (\mathrm{efficiency ~of ~p ~to ~F ~conversion})}{(\mathrm{m_s/m_*})}~.
+\]
+and as such it is reasonable that $F$ should be of \emph{order} unity.
+
+
+\subsection{$p_T \approx \pi G \sg \left(\sg + \sst\right)$}
+
+From hydrostatic equilibrium\footnote{This could be expanded a little}, the weight of the disk
+$$
+	W = \int^\infty_0 \rho_g \left(\der{\Phi_g + \Phi_b}{z}\right) \mathrm{d}z = W_1 + W_2~,
+$$
+The first (self gravity) term can be written using the Poisson equation
+$$
+	W_1 = \frac{1}{8\pi G}\int^\infty_0 \der{\left(\der{\Phi_g}{z}\right)^2}{z} \mathrm{d} z = \frac{\pi G \sg^2}{2}~,
+$$
+with the second half needing to be solved in a less elegant manner,
+$$
+	W_2 = \int^\infty_0 \rho_g \der{\Phi_b}{z}\mathrm{d}z = \frac{4\pi G \rho_b}{3} \int^\infty_0 \rho z \mathrm{d}z = \frac{2 \pi \kappa G \rho_b \sg^2}{3 \rho_0} \approx \pi G \sg \sst
+$$
+leading to
+$$
+	p_T \approx \pi G \sg\left(\sg + \sst\right)~.
+$$
+
+
+\subsection{Equation of state from supernova driven model}
+
+Beginning with the calibrated velocity dispersion from \citet{martizzi_supernova_2015}
+$$
+	\sigma_{mod} = 1.8 \left(\frac{f}{F}\right)^{{3/5}} G^{{2/5}} P_{fin}^{{1/5}} \fgas^{{-2/5}} \sg^{{1/5}}~.
+$$
+From \citet{schaye_star_2004}, it is possible to write
+$$
+	\sg = \rho_g L_J = \sigma_{mod} \sqrt{\frac{9 \rho_g}{8G}}~,
+$$
+and substituting this
+$$
+\sigma_{mod} = 1.8^{4/5} \left(\frac{f}{F}\right)^{{3/4}} G^{{1/2}} P_{fin}^{{1/4}} \fgas^{{-1/4}} \rho_g^{{1/4}} \left(\frac{9}{8G}\right)^{1/4}~.
+$$
+Now, taking $p = \rho_g \sigma_{mod}^2$, we recover
+$$
+p = 4.5\left(\frac{f}{F}\right)^{{3/2}} G^{{3/4}} P_{fin}^{{1/2}} \fgas^{-1} \rho_\mathrm{g}^{{5/4}}~.
+$$
