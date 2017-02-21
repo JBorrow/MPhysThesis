@@ -1,0 +1,37 @@
+The gas consumption timescale for a given region is,
+\begin{equation}
+\label{eqn:gcdef}
+\tau_g = \frac{\sg}{\sfr}~,
+\end{equation}
+such that it is the timescale over which, at the current rate of star formation, all of the gas will be consumed and converted to stars.
+This is a useful parameter in simulations that contain star formation explictly, as it gives the mass of stars formed over one timestep ($\Delta M_*$ by a particle of mass $M$,
+$$
+\Delta M_* = \frac{M}{\tau_g} \Delta t~,
+$$
+where $\Delta t$ is the size of the timestep.
+
+Beginning from the dispersion relation given by \citet{martizzi2015},
+$$
+\sigma = 1.8 \left(\frac{f}{F}\right)^{{3/5}} G^{{2/5}} P_{fin}^{{1/5}} \fgas^{{-2/5}} \sg^{{1/5}},
+$$
+and the relation between $\sg$ and $\rho_g$ using the turbulent Jeans' length,
+$$
+\sg = \rho_g^{1/2} \sigma \frac{9}{8G}~,
+$$
+a relation between $\sg$ and $\rho_g$ is found directly to be
+\begin{equation}
+\label{eqn:sgrhog}
+\sg = \rho_g^{5/8} \left(\frac{9}{8G}\right)^{5/8} 1.8^{5/4} \left(\frac{f}{F}\right)^{3/4} G^{1/2} P_{fin}^{1/4} \fgas^{-1/2}~.
+\end{equation}
+Taking the star formation relation in Equation \ref{eqn:martks}, such that
+$$
+\tau_g = \frac{F\pfm\fgas}{\pi G} \frac{1}{\sg}~,
+$$
+and using the $\sg ( \rho_g )$ expression above, the star formation timescale is given to be
+\begin{equation}
+\label{eqn:gc}
+\tau_{SFR} = \frac{\Sigma_g}{\dot{\Sigma}_*} = \left[0.45 \frac{f_g^{3/2} F^{7/4}}{\pi f^{3/4} G^{7/8} P_f^{1/4}} \left(\frac{P_{f}}{m_*}\right)\right] \rho_g^{-5/8}~.
+\end{equation}
+
+
+
