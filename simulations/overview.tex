@@ -1,0 +1,9 @@
+There are several methods available to test an equation of state; however one particularly robust method is through the use of N-body simulations.
+The equation of state (Equation \ref{eqn:eos}) found in this work is tested using the Gadget-2 SPH code \citep{springel2005}.
+Details of the implementation, as well as the initial conditions generation, are available in appendicies \ref{app:??} and \ref{app:??} respectively.
+
+It is clear that the most robust method to test any change in gas properties is to run a full N-body simulation of a cosmological volume, in a similar fashion to \citet{schaye2015, volksberger2014}.
+These simulations, however, are incredibly computationally expensive, and so in this work isolated galaxy disks are used rather than a cosmological volume, as the analysis presented in \S \ref{sec:eos} has a clear focus on galaxy disks as a basis for the model.
+The galaxy disk runs used here also utilise a fixed NFW profile \citep{frenk1987?} to prevent spurious fluctuations caused by high-mass dark matter particles, as well as provide a more efficient computation of the problem.
+
+Full details of the simulations are available in appendix \ref{app:sims}.
