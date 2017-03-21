@@ -5,6 +5,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import survis
+from scipy.optimize import curve_fit
 
 # --------------------------- Constants
 G = 4.302e-6  # msun kpc km/s
@@ -79,6 +80,49 @@ def generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds):
     return Q_sg_r(sd_arr, rad_arr)
 
 
+def grab_experimental_data(filename):
+    """ Grabs the simulation data from file """
+
+    res_elem = 1
+    bbox = [-30, 30]
+    res = survis.helper.get_res(res_elem, bbox, bbox)
+    data_grid = survis.preprocess.DataGridder(filename, res[0], res[1], bbox[0], bbox[1], bbox[0], bbox[1], False)
+
+    sd_actual = survis.helper.sd_r(data_grid, res_elem, 30, True)
+
+    return np.array([np.array(x) for x in sd_actual])
+
+
+def get_plottable_exp(filename):
+    """ SurVis returns things in a pretty dodgy way (sorry about that) so we 
+        need to do some creative indexing... """
+
+    raw = grab_experimental_data(filename)
+
+    data = raw[:, 0, 0]
+    errors = raw[:, 0, 1]
+
+    return data, errors
+
+
+def sg_fit(r, Q, x):
+    return sig_g(r+x, Q)
+
+
+def fit_data(filename):
+    """ Fits the data from (filename) using curve_fit and returns the
+        appropriate value for Q and the error. """
+    
+    data, errors = get_plottable_exp(filename)
+    data = data[:15]
+    errors = errors[:15]
+    r = np.arange(len(data))
+
+    popt, perr = curve_fit(sg_fit, r, data, p0=[0.7, 2], sigma=errors, absolute_sigma=True)
+
+    return popt, perr
+
+
 if __name__ == "__main__":
     # Run in script mode and actually generate the plot
 
@@ -92,10 +136,14 @@ if __name__ == "__main__":
 
 
     r = np.arange(0, 30, 0.05)
-    sg_1 = sig_g(r, 1)
-    sg_05 = sig_g(r, 0.5)
-    sg_5 = sig_g(r, 5)
     ax.plot(r, exp_profile(r)/1e6, label=r"Traditional exponential", ls="dotted")
+
+    # Simulation data
+    gas, err = get_plottable_exp("martizzi_eos_200.hdf5")
+
+    ax.errorbar(np.arange(len(gas)), gas/1e6, yerr=5*err/1e6, fmt="o", ms=3, label="N-Body Data")
+    popt, pcov = fit_data("martizzi_eos_200.hdf5")
+    ax.plot(r, sig_g(r, popt[0])/1e6, label="Fit to N-Body Data $Q = {:1.3f} \pm {:1.3f}$".format(popt[0], np.sqrt(pcov[0, 0])))
 
     im = ax.imshow(generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds),
               extent=[rmin, rmax, sdmin, sdmax],
