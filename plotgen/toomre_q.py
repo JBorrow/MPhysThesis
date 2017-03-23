@@ -80,10 +80,10 @@ def generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds):
     return Q_sg_r(sd_arr, rad_arr)
 
 
-def grab_experimental_data(filename):
+def grab_experimental_data(filename, bins=30):
     """ Grabs the simulation data from file """
 
-    res_elem = 1
+    res_elem = 1*(30/bins)
     bbox = [-30, 30]
     res = survis.helper.get_res(res_elem, bbox, bbox)
     data_grid = survis.preprocess.DataGridder(filename, res[0], res[1], bbox[0], bbox[1], bbox[0], bbox[1], False)
@@ -93,11 +93,11 @@ def grab_experimental_data(filename):
     return np.array([np.array(x) for x in sd_actual])
 
 
-def get_plottable_exp(filename):
+def get_plottable_exp(filename, bins=30):
     """ SurVis returns things in a pretty dodgy way (sorry about that) so we 
         need to do some creative indexing... """
 
-    raw = grab_experimental_data(filename)
+    raw = grab_experimental_data(filename, bins)
 
     data = raw[:, 0, 0]
     errors = raw[:, 0, 1]
@@ -109,16 +109,21 @@ def sg_fit(r, Q, x):
     return sig_g(r+x, Q)
 
 
-def fit_data(filename):
+def fit_data(filename, bins=30):
     """ Fits the data from (filename) using curve_fit and returns the
         appropriate value for Q and the error. """
     
-    data, errors = get_plottable_exp(filename)
-    data = data[:15]
-    errors = errors[:15]
-    r = np.arange(len(data))
+    data, errors = get_plottable_exp(filename, bins)
+    data = data
+    errors = errors
+    r = np.arange(len(data)*(bins/30))*(30/bins)
 
-    popt, perr = curve_fit(sg_fit, r, data, p0=[0.7, 2], sigma=errors, absolute_sigma=True)
+    def cut_data(x):
+        return x[int(bins/10):int(bins/2)]
+
+    print(cut_data(r))
+
+    popt, perr = curve_fit(sg_fit, cut_data(r), cut_data(data), p0=[0.7, 2], sigma=cut_data(errors), absolute_sigma=True)
 
     return popt, perr
 
@@ -132,6 +137,7 @@ if __name__ == "__main__":
     rmax = 30
     sdmin = 0
     sdmax = 10
+    bins = 100
     ds, dr = 0.005, 0.01
 
 
@@ -139,11 +145,11 @@ if __name__ == "__main__":
     ax.plot(r, exp_profile(r)/1e6, label=r"Traditional exponential", ls="dotted")
 
     # Simulation data
-    gas, err = get_plottable_exp("martizzi_eos_200.hdf5")
+    gas, err = get_plottable_exp("martizzi_eos_200.hdf5", bins=bins)
 
-    ax.errorbar(np.arange(len(gas)), gas/1e6, yerr=5*err/1e6, fmt="o", ms=3, label="N-Body Data")
-    popt, pcov = fit_data("martizzi_eos_200.hdf5")
-    ax.plot(r, sig_g(r, popt[0])/1e6, label="Fit to N-Body Data $Q = {:1.3f} \pm {:1.3f}$".format(popt[0], np.sqrt(pcov[0, 0])))
+    ax.errorbar(np.arange(len(gas))*(30/bins), gas/1e6, yerr=5*err/1e6, fmt="o", ms=3, label="N-Body Data")
+    popt, pcov = fit_data("martizzi_eos_200.hdf5", bins=bins)
+    ax.plot(r, sg_fit(r, popt[0], popt[1])/1e6, label="Fit to N-Body Data $Q = {:1.3f} \pm {:1.3f}$".format(popt[0], np.sqrt(pcov[0, 0])))
 
     im = ax.imshow(generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds),
               extent=[rmin, rmax, sdmin, sdmax],
