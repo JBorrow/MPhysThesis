@@ -1,2 +1,5 @@
 pdflatex -output-directory=compiled main.tex
-evince compiled/main.pdf
+
+inkscape -D --file=plotgen/structure.svg --export-pdf=plotgen/structure.pdf
+
+evince compiled/main.pdf &
