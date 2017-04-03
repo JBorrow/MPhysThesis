@@ -134,12 +134,11 @@ if __name__ == "__main__":
     fig, ax = plt.subplots()
 
     rmin = 0
-    rmax = 30
-    sdmin = 0
-    sdmax = 10
+    rmax = 15
+    sdmin = 0.2
+    sdmax = 100
     bins = 100
     ds, dr = 0.005, 0.01
-
 
     r = np.arange(0, 30, 0.05)
     ax.plot(r, exp_profile(r)/1e6, label=r"Traditional exponential", ls="dotted")
@@ -151,14 +150,24 @@ if __name__ == "__main__":
     popt, pcov = fit_data("martizzi_eos_200.hdf5", bins=bins)
     ax.plot(r, sg_fit(r, popt[0], popt[1])/1e6, label="Fit to N-Body Data $Q = {:1.3f} \pm {:1.3f}$".format(popt[0], np.sqrt(pcov[0, 0])))
 
-    im = ax.imshow(generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds),
+    # Generate the backgorund colormap
+    image_data = generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds)
+    im = ax.imshow(image_data,
               extent=[rmin, rmax, sdmin, sdmax],
               vmin=0,
               vmax=2,
               cmap="RdYlBu",
               aspect="auto")
 
+    # This imshow is too 'bright' -- we need to overlay a whiteout
+    whiteout = np.ones_like(image_data)
+    alpha = 0.5
+    overlay = np.array([whiteout, whiteout, whiteout, alpha*whiteout]).T
+    ax.imshow(overlay,
+              extent=[rmin, rmax, sdmin, sdmax])
 
+
+    ax.semilogy()
     ax.set_ylim(sdmin, sdmax)
     ax.set_xlim(rmin, rmax)
     ax.set_xlabel("Radius [kpc]")
@@ -166,7 +175,7 @@ if __name__ == "__main__":
     ax.set_title("Expected $\Sigma_g(r)$ for the Martizzi Model")
 
     fig.colorbar(im, label="Toomre $Q$")
-    
+
     plt.legend()
 
     plt.tight_layout()
