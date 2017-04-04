@@ -22,3 +22,16 @@ Hamilton HPC service at Durham University. Datasets are not made
 available due to their prohibitive size, however some moves are
 available in the aforementioned repository.
 
+\subsection{Gadget Time}
+\label{app:gadgettime}
+
+It is important to be able to convert between snapshot number, internal code time, and `real' time.
+An easy way to calculate this is to take the units of velocity ($\kms$) and distance (kpc) used in the code to calculate timesteps,
+$$
+    v ~ [\kms] ~ \cdot \Delta t ~ [\mathrm{sim}] = x ~ [\mathrm{kpc}]~.
+$$
+This leads to a relation
+$$
+    \mathrm{sim} = \frac{\pc}{\mathrm{m}} \mathrm{s}~,
+$$
+meaning that one simulation unit of time $\mathrm{sim} \approx 1 \mathrm{Gyr}$, and each snapshot encapsulates 0.02 Gyr of `real' time.
