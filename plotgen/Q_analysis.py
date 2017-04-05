@@ -99,7 +99,7 @@ if __name__ == "__main__":
     # /JUST FOR NOW
     cb = plt.colorbar(img, cax=cbar_ax, orientation='horizontal', label="Toomre $Q$")
     cb.set_ticks(np.arange(0, 2, 0.25))
-    ticklabels = ["0", "0.25", "0.5", "0.75", "1.0", "1.25", "1.5", r"1.75 $\rightarrow$"]
+    ticklabels = ["0", "0.25", "0.5", "0.75", "1.0", "1.25", "1.5", r"   1.75 $\rightarrow$"]
     cb.set_ticklabels(ticklabels)
 
 
