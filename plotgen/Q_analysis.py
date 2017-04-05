@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     print("Generating the (simulation) Toomre Q Figure -- Q_analysis.py")
 
-    fig = plt.figure(figsize=(7.7, 7.7))
+    fig = plt.figure(figsize=(7.8, 7.8))
     gs = gridspec.GridSpec(4, 3,
             height_ratios=[10, 10, 1, 9])
 
@@ -97,8 +97,11 @@ if __name__ == "__main__":
     # JUST FOR NOW
     axes[6], img = plot_single(axes[6], sim_data['default'].Q_map, 'default', cmap, vmin, vmax, extent)
     # /JUST FOR NOW
-    plt.colorbar(img, cax=cbar_ax, orientation='horizontal', label="Toomre $Q$")
-    cbar_ax.xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='both'))
+    cb = plt.colorbar(img, cax=cbar_ax, orientation='horizontal', label="Toomre $Q$")
+    cb.set_ticks(np.arange(0, 2, 0.25))
+    ticklabels = ["0", "0.25", "0.5", "0.75", "1.0", "1.25", "1.5", r"1.75 $\rightarrow$"]
+    cb.set_ticklabels(ticklabels)
+
 
     axes[1].xaxis.set_label_position('top')
     axes[1].set_xlabel("Distance from galactic center [kpc]")
