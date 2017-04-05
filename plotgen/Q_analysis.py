@@ -18,7 +18,7 @@ def get_data():
 def plot_single(ax, data, name, cmap, vmin, vmax, extent, delta=3):
     colormap = cm.get_cmap(cmap)
     c_scale = col.Normalize(vmin=vmin , vmax=vmax)
-    colormap.set_bad("white", 1.0)     
+    colormap.set_bad("black", 0.9)     
 
     img = ax.imshow(data,
                     vmin=vmin,
@@ -26,7 +26,7 @@ def plot_single(ax, data, name, cmap, vmin, vmax, extent, delta=3):
                     cmap=cmap,
                     extent=extent)
 
-    text = ax.text(extent[0] + delta, extent[2] + delta, name, color="black")
+    text = ax.text(extent[0] + delta, extent[2] + delta, name, color="white", size=8)
 
     return ax, img
 
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     gs = gridspec.GridSpec(4, 3,
             height_ratios=[10, 10, 1, 9])
 
-    extent = [-30, 30, -30, 30]
+    extent = [-40, 40, -40, 40]
     vmin = 0
     vmax = 2
     cmap = "viridis"
@@ -53,6 +53,19 @@ if __name__ == "__main__":
         fig.add_subplot(gs[1, 2]),
         fig.add_subplot(gs[2:, 2]),
     ]
+
+    axes[0].xaxis.tick_top()
+    axes[0].tick_params(labelleft='off')
+    axes[1].xaxis.tick_top()
+    axes[1].tick_params(labelleft='off')
+    axes[2].xaxis.tick_top()
+    axes[2].yaxis.tick_right()
+    axes[3].tick_params(labelleft='off', labelbottom='off')
+    axes[4].tick_params(labelleft='off', labelbottom='off')
+    axes[5].yaxis.tick_right()
+    axes[5].tick_params(labelbottom='off')
+    axes[6].yaxis.tick_right()
+    axes[6].tick_params(labelbottom='off')
 
     cbar_ax = fig.add_subplot(gs[2, 0:2])
 
@@ -68,7 +81,11 @@ if __name__ == "__main__":
                                    extent)
 
 
+    # JUST FOR NOW
+    axes[6], img = plot_single(axes[6], sim_data['default'].Q_map, 'default', cmap, vmin, vmax, extent)
+    # /JUST FOR NOW
     plt.colorbar(img, cax=cbar_ax, orientation='horizontal', label="Toomre $Q$")
+    plt.tight_layout()
 
     fig.show()
     input()
