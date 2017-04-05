@@ -56,7 +56,7 @@ def sig_g_default(r, Q=Qmarg):
     v = np.sqrt(G * m_nfw(r)/(r**3))
     sound_speed = np.sqrt((5./3.)*1.38e-23*1e4/1.67e-27)/1e3
 
-    return (sound_speed * v)/(np.pi * G * Q * (1./5.)*(3 + 2./fg))
+    return (sound_speed * np.sqrt(2)* v)/(np.pi * G * Q * (1./5.)*(3 + 2./fg))
 
 
 def exp_profile(r):
@@ -167,12 +167,15 @@ if __name__ == "__main__":
 
     rmin = 0
     rmax = 15
-    sdmin = 0.2
+    sdmin = 1
     sdmax = 100
     bins = 100
     ds, dr = 0.005, 0.005
 
-    #r = np.arange(0, 30, 0.05)
+    r = np.arange(0, 30, 0.05)
+    ax_custom.plot(r, sig_g_custom(r, Q=1)/1e6, color='grey', lw=1)
+    ax_default.plot(r, sig_g_default(r, Q=1)/1e6, color='grey', lw=1)
+
     #ax.plot(r, exp_profile(r)/1e6, label=r"Traditional exponential", ls="dotted")
 
     # Simulation data
@@ -188,7 +191,7 @@ if __name__ == "__main__":
               extent=[rmin, rmax, sdmin, sdmax],
               vmin=0,
               vmax=2,
-              cmap="RdYlBu",
+              cmap="Spectral",
               aspect="auto")
 
     image_data_default = generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds, Q_sg_r_default)
@@ -196,7 +199,7 @@ if __name__ == "__main__":
               extent=[rmin, rmax, sdmin, sdmax],
               vmin=0,
               vmax=2,
-              cmap="RdYlBu",
+              cmap="Spectral",
               aspect="auto")
 
 
