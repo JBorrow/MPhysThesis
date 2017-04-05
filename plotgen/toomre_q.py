@@ -219,4 +219,4 @@ if __name__ == "__main__":
     if "--showfig" in sys.argv:
         plt.show()
     else:
-        plt.savefig("plotgen/toomre_q_theory.pdf")
+        plt.savefig("plotgen/toomre_q_theory.pdf", dpi=300)
