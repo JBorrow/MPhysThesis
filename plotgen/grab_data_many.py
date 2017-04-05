@@ -43,12 +43,13 @@ if __name__ == "__main__":
         except:
             print("Snapshot {} {} not found, skipping.".format(simulation, snapshot))
             continue
-
+        
+        tqdm.write("Analysing {} {}".format(simulation, snapshot))
         data.run_analysis()
 
         output[simulation] = data
 
     # Now we pickle the data ready for download
 
-    with open('snapshot_{:03d}_data.pkl', 'wb') as pck:
-        pickle.dump(result, pck)
+    with open('snapshot_{:03d}_data.pkl'.format(snapshot), 'wb') as pck:
+        pickle.dump(output, pck)
