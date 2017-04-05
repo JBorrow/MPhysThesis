@@ -27,6 +27,7 @@ c = 20.1
 #derived
 mart_pref = 1.8 * (f/F)**(3/5) * G**(2/5) * Pf**(1/5) * fg**(-2/5)
 sigma_0 = M_disk/(2*np.pi*R_disk**2)
+
 # --------------------------------------------------------
 
 
@@ -39,14 +40,23 @@ def m_nfw(r):
     return (np.log((r + R)/R) - r/(r+R))*norm
 
 
-def sig_g(r, Q=Qmarg):
+def sig_g_custom(r, Q=Qmarg):
     """ Expected Sigma_Gas as a function of radius for a constant Toomre Q
         Parameter Q. """
 
-    this_pref = (np.sqrt(2) * mart_pref * fg)/(np.pi * G * Q)
+    this_pref = (np.sqrt(2) * mart_pref)/(np.pi * G * Q  * (1./5.)*(3 + 2./fg))
     v = np.sqrt(G * m_nfw(r)/(r**3))
 
     return (this_pref * v)**(5/4)
+
+
+def sig_g_default(r, Q=Qmarg):
+    """ Expected Sigma_Gas as a function of radius for a constant toomre Q
+        with the default GADGET model """
+    v = np.sqrt(G * m_nfw(r)/(r**3))
+    sound_speed = np.sqrt((5./3.)*1.38e-23*1e4/1.67e-27)/1e3
+
+    return (sound_speed * v)/(np.pi * G * Q * (1./5.)*(3 + 2./fg))
 
 
 def exp_profile(r):
@@ -55,17 +65,25 @@ def exp_profile(r):
     return sigma_0 * (np.exp(-r/R_disk))
 
 
-def Q_sg_r(sg, r):
+def Q_sg_r_custom(sg, r):
     """ Used to generate the background colour map, gives Q as a function of
         surface density and radius, for a given galaxy. """
 
-    this_pref = (np.sqrt(2) * mart_pref * fg)/(np.pi * G * (sg*1e6)**(4/5))
+    this_pref = (np.sqrt(2) * mart_pref * 5)/(np.pi * G * (3 + 2./fg) * (sg*1e6)**(4/5))
     v = np.sqrt(G * m_nfw(r)/(r**3))
 
     return (this_pref * v)
 
+def Q_sg_r_default(sg, r):
+    """ Expected Sigma_Gas as a function of radius for a constant toomre Q
+        with the default GADGET model """
+    v = np.sqrt(G * m_nfw(r)/(r**3))
+    sound_speed = np.sqrt((5./3.)*1.38e-23*1e4/1.67e-27)/1e3
 
-def generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds):
+    return (sound_speed *np.sqrt(2)* v)/(np.pi * G * (sg*1e6) * (1./5.)*(3 + 2./fg))
+
+
+def generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds, Qfunc=Q_sg_r_custom):
     """ Generates the background matrix using Q_sg_r for the plot's colourmap.
         dr ds give the resolution of the matrix. """
 
@@ -77,7 +95,7 @@ def generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds):
     sd_arr = np.outer(np.flip(surface_densities, 0), np.ones_like(radii))
     rad_arr = np.outer(np.ones_like(surface_densities), radii)
 
-    return Q_sg_r(sd_arr, rad_arr)
+    return Qfunc(sd_arr, rad_arr)
 
 
 def grab_experimental_data(filename, bins=30):
@@ -130,8 +148,17 @@ def fit_data(filename, bins=30):
 
 if __name__ == "__main__":
     # Run in script mode and actually generate the plot
+    import matplotlib.gridspec as gridspec
+    np.seterr(invalid='ignore')
+    print("Generating the (theory) Toomre Q Figure -- toomre_q.py")
 
-    fig, ax = plt.subplots()
+    fig = plt.figure(figsize=(6.3, 4))
+
+    gs = gridspec.GridSpec(1, 3, width_ratios=[10, 10, 1])
+
+    ax_custom = fig.add_subplot(gs[0])
+    ax_default = fig.add_subplot(gs[1])
+    ax_cb = fig.add_subplot(gs[2])
 
     rmin = 0
     rmax = 15
@@ -140,44 +167,51 @@ if __name__ == "__main__":
     bins = 100
     ds, dr = 0.005, 0.01
 
-    r = np.arange(0, 30, 0.05)
-    ax.plot(r, exp_profile(r)/1e6, label=r"Traditional exponential", ls="dotted")
+    #r = np.arange(0, 30, 0.05)
+    #ax.plot(r, exp_profile(r)/1e6, label=r"Traditional exponential", ls="dotted")
 
     # Simulation data
-    gas, err = get_plottable_exp("martizzi_eos_200.hdf5", bins=bins)
+    #gas, err = get_plottable_exp("martizzi_eos_200.hdf5", bins=bins)
 
-    ax.errorbar(np.arange(len(gas))*(30/bins), gas/1e6, yerr=5*err/1e6, fmt="o", ms=3, label="N-Body Data")
-    popt, pcov = fit_data("martizzi_eos_200.hdf5", bins=bins)
-    ax.plot(r, sg_fit(r, popt[0], popt[1])/1e6, label="Fit to N-Body Data $Q = {:1.3f} \pm {:1.3f}$".format(popt[0], np.sqrt(pcov[0, 0])))
+    #ax.errorbar(np.arange(len(gas))*(30/bins), gas/1e6, yerr=5*err/1e6, fmt="o", ms=3, label="N-Body Data")
+    #popt, pcov = fit_data("martizzi_eos_200.hdf5", bins=bins)
+    #ax.plot(r, sg_fit(r, popt[0], popt[1])/1e6, label="Fit to N-Body Data $Q = {:1.3f} \pm {:1.3f}$".format(popt[0], np.sqrt(pcov[0, 0])))
 
     # Generate the backgorund colormap
-    image_data = generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds)
-    im = ax.imshow(image_data,
+    image_data_custom = generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds, Q_sg_r_custom)
+    im_custom = ax_custom.imshow(image_data_custom,
               extent=[rmin, rmax, sdmin, sdmax],
               vmin=0,
               vmax=2,
               cmap="RdYlBu",
               aspect="auto")
 
-    # This imshow is too 'bright' -- we need to overlay a whiteout
-    whiteout = np.ones_like(image_data)
-    alpha = 0.5
-    overlay = np.array([whiteout, whiteout, whiteout, alpha*whiteout]).T
-    ax.imshow(overlay,
-              extent=[rmin, rmax, sdmin, sdmax])
+    image_data_default = generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds, Q_sg_r_default)
+    im_default = ax_default.imshow(image_data_default,
+              extent=[rmin, rmax, sdmin, sdmax],
+              vmin=0,
+              vmax=2,
+              cmap="RdYlBu",
+              aspect="auto")
 
 
-    ax.semilogy()
-    ax.set_ylim(sdmin, sdmax)
-    ax.set_xlim(rmin, rmax)
-    ax.set_xlabel("Radius [kpc]")
-    ax.set_ylabel("Surface density [$M_\odot$ pc$^{-2}$]")
-    ax.set_title("Expected $\Sigma_g(r)$ for the Martizzi Model")
+    for plot in [ax_custom, ax_default]:
+        plot.set_ylim(sdmin, sdmax)
+        plot.semilogy()
+        plot.set_xlim(rmin, rmax)
+        plot.set_xlabel("Radius [kpc]")
 
-    fig.colorbar(im, label="Toomre $Q$")
+    ax_default.get_yaxis().set_visible(False)
 
-    plt.legend()
+    ax_custom.set_ylabel("Surface density [$M_\odot$ pc$^{-2}$]")
+
+    plt.colorbar(im_custom, label="Toomre $Q$", cax=ax_cb)
 
     plt.tight_layout()
 
-    plt.show()
+    import sys
+
+    if "--showfig" in sys.argv:
+        plt.show()
+    else:
+        plt.savefig("plotgen/toomre_q_theory.pdf")
