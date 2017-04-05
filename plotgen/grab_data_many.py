@@ -8,10 +8,12 @@ from tqdm import tqdm
 
 # ---- Global Parameters
 snapshot = 100
-bbox_x = [-30, 30]
+bbox_x = [-40, 40]
 bbox_y = bbox_x
-res_elem = 0.5
-res = survis.helper.get_res(res_elem, bbox_x, bbox_y)
+res_elem_lr = 0.5
+res_elem_nr = 0.2
+res_lr = survis.helper.get_res(res_elem_lr, bbox_x, bbox_y)
+res_nr = survis.helper.get_res(res_elem_nr, bbox_x, bbox_y)
 # ----------------------
 
 
@@ -38,11 +40,15 @@ if __name__ == "__main__":
     for simulation in tqdm(grab_names()):
         filename = "{}/snapshot_{:03d}.hdf5".format(simulation, snapshot)
 
+        if "lowres" in simulation:
+            data = survis.analysis.CommonDataObject(filename, res_lr, bbox_x, bbox_y, res_elem_lr)
+        else:
+            data = survis.analysis.CommonDataObject(filename, res_nr, bbox_x, bbox_y, res_elem_nr)
+
         try:
-            data = survis.analysis.CommonDataObject(filename, res, bbox_x, bbox_y, res_elem)
-            tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
-            data.run_analysis()
-            tqdm.write("Analysis of {} {} successful.".format(simulation, snapshot))
+                tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
+                data.run_analysis()
+                tqdm.write("Analysis of {} {} successful.".format(simulation, snapshot))
         except:
             print("Snapshot {} {} not found, skipping.".format(simulation, snapshot))
             continue
