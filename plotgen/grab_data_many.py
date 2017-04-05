@@ -37,7 +37,12 @@ if __name__ == "__main__":
     for simulation in grab_names():
         filename = "{}/snapshot_{:03d}.hdf5".format(simulation, snapshot)
 
-        data = survis.analysis.CommonDataObject(filename, res, bbox_x, bbox_y, res_elem)
+        try:
+            data = survis.analysis.CommonDataObject(filename, res, bbox_x, bbox_y, res_elem)
+        except:
+            print("Snapshot {} {} not found, skipping.".format(simulation, snapshot))
+            continue
+
         data.run_analysis()
 
         output[simulation] = data
