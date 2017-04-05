@@ -157,7 +157,7 @@ if __name__ == "__main__":
     np.seterr(invalid='ignore')
     print("Generating the (theory) Toomre Q Figure -- toomre_q.py")
 
-    fig = plt.figure(figsize=(6.3, 4))
+    fig = plt.figure(figsize=(6.3, 3))
 
     gs = gridspec.GridSpec(1, 3, width_ratios=[10, 10, 1])
 
