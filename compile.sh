@@ -6,6 +6,7 @@ if [[ "$1" == "--figs" ]]; then
     inkscape -D --file=plotgen/flowchart.svg --export-pdf=plotgen/flowchart.pdf
 
     python3 plotgen/toomre_q.py
+    python3 plotgen/Q_analysis.py
 fi
 
 echo " --##--##--##--##--##--##--##--##--##--##--##--##--##--##--##-- "
