@@ -40,12 +40,13 @@ if __name__ == "__main__":
 
         try:
             data = survis.analysis.CommonDataObject(filename, res, bbox_x, bbox_y, res_elem)
+            tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
+            data.run_analysis()
+            tqdm.write("Analysis of {} {} successful.".format(simulation, snapshot))
         except:
             print("Snapshot {} {} not found, skipping.".format(simulation, snapshot))
             continue
         
-        tqdm.write("Analysing {} {}".format(simulation, snapshot))
-        data.run_analysis()
 
         output[simulation] = data
 
