@@ -11,8 +11,12 @@ import pickle
 filename = "snapshot_100_data.pkl"
 
 def get_data():
-    with open(filename, 'rb') as asset:
-        return pickle.load(asset)
+    try:
+        with open(filename, 'rb') as asset:
+            return pickle.load(asset)
+    except FileNotFoundError:
+        with open("plotgen/{}".format(filename), 'rb') as asset:
+            return pickle.load(asset)
 
 
 def plot_single(ax, data, name, cmap, vmin, vmax, extent, delta=3):
@@ -34,10 +38,11 @@ def plot_single(ax, data, name, cmap, vmin, vmax, extent, delta=3):
 if __name__ == "__main__":
     """ Run in script mode, and produce plots """
     import matplotlib.gridspec as gridspec
+    from matplotlib.ticker import MaxNLocator
 
     print("Generating the (simulation) Toomre Q Figure -- Q_analysis.py")
 
-    fig = plt.figure(figsize=(6.3, 6.3))
+    fig = plt.figure(figsize=(7.7, 7.7))
     gs = gridspec.GridSpec(4, 3,
             height_ratios=[10, 10, 1, 9])
 
@@ -56,17 +61,23 @@ if __name__ == "__main__":
         fig.add_subplot(gs[2:, 2]),
     ]
 
+    nbins = len(axes[0].get_xticklabels())
+
     axes[0].xaxis.tick_top()
+    axes[0].xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
     axes[0].tick_params(labelleft='off')
     axes[1].xaxis.tick_top()
+    axes[1].xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
     axes[1].tick_params(labelleft='off')
     axes[2].xaxis.tick_top()
     axes[2].yaxis.tick_right()
     axes[3].tick_params(labelleft='off', labelbottom='off')
     axes[4].tick_params(labelleft='off', labelbottom='off')
     axes[5].yaxis.tick_right()
+    axes[5].yaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
     axes[5].tick_params(labelbottom='off')
     axes[6].yaxis.tick_right()
+    axes[6].yaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
     axes[6].tick_params(labelbottom='off')
 
     cbar_ax = fig.add_subplot(gs[2, 0:2])
@@ -87,6 +98,15 @@ if __name__ == "__main__":
     axes[6], img = plot_single(axes[6], sim_data['default'].Q_map, 'default', cmap, vmin, vmax, extent)
     # /JUST FOR NOW
     plt.colorbar(img, cax=cbar_ax, orientation='horizontal', label="Toomre $Q$")
+    cbar_ax.xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='both'))
+
+    axes[1].xaxis.set_label_position('top')
+    axes[1].set_xlabel("Distance from galactic center [kpc]")
+    axes[5].yaxis.set_label_position('right')
+    axes[5].set_ylabel("Distance from galactic center [kpc]")
+
+    pad = 0.1
+    fig.subplots_adjust(left=0+pad, bottom=0+pad, right=1-pad, top=1-pad, wspace=0, hspace=0)
 
     import sys
     
