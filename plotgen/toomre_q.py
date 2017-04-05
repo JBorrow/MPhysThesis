@@ -149,6 +149,11 @@ def fit_data(filename, bins=30):
 if __name__ == "__main__":
     # Run in script mode and actually generate the plot
     import matplotlib.gridspec as gridspec
+    import matplotlib
+
+    font = {'size':10}
+    matplotlib.rc('font', **font)
+
     np.seterr(invalid='ignore')
     print("Generating the (theory) Toomre Q Figure -- toomre_q.py")
 
@@ -165,7 +170,7 @@ if __name__ == "__main__":
     sdmin = 0.2
     sdmax = 100
     bins = 100
-    ds, dr = 0.005, 0.01
+    ds, dr = 0.005, 0.005
 
     #r = np.arange(0, 30, 0.05)
     #ax.plot(r, exp_profile(r)/1e6, label=r"Traditional exponential", ls="dotted")
