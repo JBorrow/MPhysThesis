@@ -35,6 +35,8 @@ if __name__ == "__main__":
     """ Run in script mode, and produce plots """
     import matplotlib.gridspec as gridspec
 
+    print("Generating the (simulation) Toomre Q Figure -- Q_analysis.py")
+
     fig = plt.figure(figsize=(6.3, 6.3))
     gs = gridspec.GridSpec(4, 3,
             height_ratios=[10, 10, 1, 9])
@@ -85,8 +87,12 @@ if __name__ == "__main__":
     axes[6], img = plot_single(axes[6], sim_data['default'].Q_map, 'default', cmap, vmin, vmax, extent)
     # /JUST FOR NOW
     plt.colorbar(img, cax=cbar_ax, orientation='horizontal', label="Toomre $Q$")
-    plt.tight_layout()
 
-    fig.show()
-    input()
+    import sys
+    
+    if "--showfig" in sys.argv:
+        fig.show()
+        input()
+    else:
+        plt.savefig("plotgen/toomre_q_simulation.pdf", dpi=300)
                                    
