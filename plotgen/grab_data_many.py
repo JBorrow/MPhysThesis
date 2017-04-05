@@ -4,6 +4,7 @@
 import survis
 import os
 import pickle
+from tqdm import tqdm
 
 # ---- Global Parameters
 snapshot = 100
@@ -34,7 +35,7 @@ if __name__ == "__main__":
     # Run in scripting mode, and actually perform the analysis
     output = {}
 
-    for simulation in grab_names():
+    for simulation in tqdm(grab_names()):
         filename = "{}/snapshot_{:03d}.hdf5".format(simulation, snapshot)
 
         try:
