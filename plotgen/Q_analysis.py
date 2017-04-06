@@ -21,13 +21,12 @@ def get_data():
 
 def plot_single(ax, data, name, cmap, vmin, vmax, extent, delta=3):
     colormap = cm.get_cmap(cmap)
-    c_scale = col.Normalize(vmin=vmin , vmax=vmax)
     colormap.set_bad("black", 0.9)     
 
     img = ax.imshow(data,
                     vmin=vmin,
                     vmax=vmax,
-                    cmap=cmap,
+                    cmap=colormap,
                     extent=extent)
 
     text = ax.text(extent[0] + delta, extent[2] + delta, name, color="white", size=8)
