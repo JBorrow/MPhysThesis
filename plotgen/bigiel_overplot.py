@@ -27,7 +27,7 @@ def fgas(sg, tot=50):
 if __name__ == "__main__":
     # Run in script mode, actually produce the plot
 
-    fig = plt.figure(figsize=(8,6))
+    fig = plt.figure(figsize=(6.3, 6.3))
 
     colors = ['#006388', '#950F2C', '#7E317B', '#164B44', '#C43B8E', '#968E85']
 
@@ -54,7 +54,10 @@ if __name__ == "__main__":
     plt.plot(sgs, sfr_ulirg150, color=colors[4], label='$\Sigma_\mathrm{tot}$ = 150 M$_\odot$ pc$^{-2}$')
     plt.plot(sgs, sfr_ulirg1000, color=colors[4], label='$\Sigma_\mathrm{tot}$ = $10^4$ M$_\odot$ pc$^{-2}$')
 
-    original = Image.open("bigiel_overplot.png")
+    try:
+        original = Image.open("bigiel_extract.png")
+    except FileNotFoundError:
+        original = Image.open("plotgen/bigiel_extract.png")
 
     plt.imshow(original, extent=[-1, 5, -5, 3], aspect=6/8)
 
@@ -62,5 +65,10 @@ if __name__ == "__main__":
     plt.ylabel(r'log $\dot{\Sigma}_*$ [M$_\odot$ yr$^{-1}$ kpc$^{-2}$]')
     plt.legend(loc=4)
 
-    plt.savefig('bigiel_test.pdf', dpi=600)
+    import sys
+
+    if "--showfig" in sys.argv:
+        plt.show()
+    else:
+        plt.savefig('plotgen/bigiel_fig.pdf', dpi=600)
 
