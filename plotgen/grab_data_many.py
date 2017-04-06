@@ -46,9 +46,12 @@ if __name__ == "__main__":
             data = survis.analysis.CommonDataObject(filename, res_nr, bbox_x, bbox_y, res_elem_nr)
 
         try:
-                tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
-                data.run_analysis()
-                tqdm.write("Analysis of {} {} successful.".format(simulation, snapshot))
+            if "default" in simulation:
+                data.sound_speed = survis.toomre.sound_speed
+
+            tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
+            data.run_analysis()
+            tqdm.write("Analysis of {} {} successful.".format(simulation, snapshot))
         except:
             print("Snapshot {} {} not found, skipping.".format(simulation, snapshot))
             continue
