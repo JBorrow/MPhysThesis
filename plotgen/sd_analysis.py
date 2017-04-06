@@ -97,10 +97,10 @@ if __name__ == "__main__":
     # JUST FOR NOW
     axes[6], img = plot_single(axes[6], sim_data['default'].sd_map, 'default', cmap, vmin, vmax, extent)
     # /JUST FOR NOW
-    cb = plt.colorbar(img, cax=cbar_ax, orientation='horizontal', label="$\log\Sigma_{g}$ [$M_\odot$ $pc^{-2}$]")
-    #cb.set_ticks(np.arange(0, 2, 0.25))
-    #ticklabels = ["0", "0.25", "0.5", "0.75", "1.0", "1.25", "1.5", r"   1.75 $\rightarrow$"]
-    #cb.set_ticklabels(ticklabels)
+    cb = plt.colorbar(img, cax=cbar_ax, orientation='horizontal', label="log $\Sigma_{g}$ [M$_\odot$ pc$^{-2}$]")
+    cb.set_ticks(np.arange(-1, 3, 0.5))
+    ticklabels = [r"$\leftarrow$ -1    ", "-0.5", "0", "0.5", "1", "1.5", "2.0", r"   2.5 $\rightarrow$"]
+    cb.set_ticklabels(ticklabels)
 
 
     axes[1].xaxis.set_label_position('top')
