@@ -27,6 +27,8 @@ def fgas(sg, tot=50):
 if __name__ == "__main__":
     # Run in script mode, actually produce the plot
 
+    print("Generating the Bigiel Overplot Figure -- bigiel_overplot.py")
+
     fig = plt.figure(figsize=(6.3, 6.3))
 
     colors = ['#006388', '#950F2C', '#7E317B', '#164B44', '#C43B8E', '#968E85']

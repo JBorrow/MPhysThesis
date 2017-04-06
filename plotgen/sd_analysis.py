@@ -40,7 +40,7 @@ if __name__ == "__main__":
     import matplotlib.gridspec as gridspec
     from matplotlib.ticker import MaxNLocator
 
-    print("Generating the (simulation) Toomre Q Figure -- Q_analysis.py")
+    print("Generating the (simulation) Surface Density Figure -- sd_analysis.py")
 
     fig = plt.figure(figsize=(7.8, 7.8))
     gs = gridspec.GridSpec(4, 3,

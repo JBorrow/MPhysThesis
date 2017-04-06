@@ -1,3 +1,12 @@
+\begin{figure}[!ht]
+    \savebox{\graphicsbox}{\includegraphics[trim={1.95cm 1.9cm 1.9cm 1.9cm}]{sd_simulation.pdf}}% Store image
+    \leavevmode\rlap{\usebox{\graphicsbox}}% Set image with complete overlap
+    \begin{minipage}[b]{0.63\wd\graphicsbox}% Insert caption
+        \caption{Testing}
+        \label{fig:toomqsimbigfig}
+    \end{minipage}\hspace*{0.33\wd\graphicsbox}% Add space to represent figure width
+\end{figure}
+
 The simulations in \S\ref{chap:sims} are analysed using a custom python module, \sv. 
 More details about the technical implementation of the analysis module are provided in appendix \ref{app:survis}.
 Using \sv, the following aspects of the simulations are studied

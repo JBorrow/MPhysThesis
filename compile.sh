@@ -9,12 +9,14 @@ if [[ "$1" == "--figs" ]]; then
     python3 plotgen/toomre_q.py
     python3 plotgen/Q_analysis.py
     python3 plotgen/bigiel_overplot.py
+    python3 plotgen/sd_analysis.py
 fi
 
 echo " --##--##--##--##--##--##--##--##--##--##--##--##--##--##--##-- "
 echo "Running LaTeX"
 pdflatex -output-directory=compiled main.tex
 bibtex compiled/main.aux
+pdflatex -output-directory=compiled main.tex
 pdflatex -output-directory=compiled main.tex
 
 
