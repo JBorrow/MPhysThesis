@@ -4,7 +4,9 @@
 import survis
 import os
 import pickle
+import numpy as np
 from tqdm import tqdm
+from scipy.optimize import curve_fit
 
 # ---- Global Parameters
 snapshot = 97
@@ -36,13 +38,14 @@ def grab_names():
 
 class Vertical(object):
     def __init__(self, filename, res, bbox_x, bbox_y, max_rad=30, n_bins=30):
+
         data = survis.preprocess.DataGridder(filename,
                                              res[0],
                                              res[1],
                                              bbox_x[0],
                                              bbox_x[1],
-                                             bboy_y[0],
-                                             bboy_y[1],
+                                             bbox_y[0],
+                                             bbox_y[1],
                                              False)
 
         self.filename = filename
@@ -52,8 +55,8 @@ class Vertical(object):
         self.max_rad = max_rad
         self.n_bins = n_bins
 
-        crds = data['PartType0']['Coordinates']
-        z_data = data['PartType0']['Coordinates'][:, 2]
+        crds = data.gas['Coordinates']
+        z_data = data.gas['Coordinates'][:, 2]
 
         radii = np.sqrt(np.sum(np.square(crds), 1))
         
@@ -73,8 +76,8 @@ class Vertical(object):
 
         # First we must bin the data
         bins = np.arange(min, max, (max-min)/nbins)
-        n, bins = np.arange(z_data, bins)
-        bincenters = bin_cent(bins)
+        n, bins = np.histogram(z_data, bins)
+        bincenters = self.bin_cent(bins)
 
         popt, pcov = curve_fit(to_fit, bincenters, n)
 
@@ -90,8 +93,8 @@ class Vertical(object):
         output_dZ = []
 
         for index in range(len(radii_bins) - 1):  # We want to skip the first and the last
-            bottom = radii_bins[index+1]
-            top = radii_bins[index+2]
+            bottom = radii_bins[index]
+            top = radii_bins[index+1]
 
             mask = np.logical_or((radii < bottom), (radii > top))
             current_data = np.ma.masked_array(z_data, mask).compressed()
@@ -101,7 +104,7 @@ class Vertical(object):
             output_Z.append(Z)
             output_dZ.append(dZ)
 
-        return self.bin_centers(radii_bins), output_Z, output_dZ
+        return self.bin_cent(radii_bins), output_Z, output_dZ
 
 
 if __name__ == "__main__":
@@ -115,7 +118,7 @@ if __name__ == "__main__":
         if "lowres" in simulation:
             data = Vertical(filename, res_lr, bbox_x, bbox_y)
         else:
-            data = Vertical(filename, res_hr, bbox_x, bbox_y)
+            data = Vertical(filename, res_nr, bbox_x, bbox_y)
         tqdm.write("Analysis of {} {} successful.".format(simulation, snapshot))
     
         output[simulation] = data
