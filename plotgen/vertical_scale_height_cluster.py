@@ -37,7 +37,7 @@ def grab_names():
 
 
 class Vertical(object):
-    def __init__(self, filename, res, bbox_x, bbox_y, max_rad=30, n_bins=30):
+    def __init__(self, filename, res, bbox_x, bbox_y, max_rad=30, n_bins=5):
 
         data = survis.preprocess.DataGridder(filename,
                                              res[0],
@@ -69,7 +69,7 @@ class Vertical(object):
         return 0.5*(bins[1:] + bins[:1])
 
 
-    def get_scale_height(self, z_data, min=-0.4, max=0.4, nbins=50):
+    def get_scale_height(self, z_data, min=-1, max=1, nbins=25):
 
         def to_fit(z, norm, Z):
             return norm*(1/(np.cosh(z/Z)**2))
