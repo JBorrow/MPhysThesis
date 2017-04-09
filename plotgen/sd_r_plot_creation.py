@@ -51,9 +51,9 @@ def do_plot(ax, data, bin_edges, maxsnap=251, particlemass=80000):
     
     for index, dataset in enumerate(data):
         this_dataset = dataset[:maxsnap] * particlemass
-        label = "{} $\leq r$ {}".format(bin_edges[index], bin_edges[index+1])
-        ax.scatter(times, this_dataset, label=label, s=2)
-        ax.plot(times, running_average(this_dataset))
+        label = "{} $\leq r <$ {}".format(bin_edges[index], bin_edges[index+1])
+        ax.scatter(times, this_dataset/1e9, s=2)
+        ax.plot(times, running_average(this_dataset)/1e9, label=label)
 
     return ax
 
@@ -72,10 +72,7 @@ if __name__ == "__main__":
     custom_data = survis.analysis.CommonDataExtractor(custom)
     default_data = survis.analysis.CommonDataExtractor(default)
 
-    f, (ax1, ax2) = plt.subplots(1, 2, sharey=True, figsize=(6.3, 3))
-
-    ax1.set_title("Custom")
-    ax2.set_title("Default")
+    f, (ax1, ax2) = plt.subplots(1, 2, sharey=True, sharex=True, figsize=(6.3, 3))
 
     do_plot(ax1, custom_data.n_part_r.T, custom_data.bins[0], maxsnap, particlemass)
     do_plot(ax2, default_data.n_part_r.T, default_data.bins[0], maxsnap, particlemass)
@@ -83,6 +80,10 @@ if __name__ == "__main__":
     ax1.set_xlim(0, (maxsnap-1)*0.02)
     ax2.set_xlim(0, (maxsnap-1)*0.02)
 
+    ax1.set_ylabel("Mass contained [$10^9$ M$_\odot$]")
+    plt.xlabel(r"Time elapsed [Gyr]")
+
     ax2.legend()
+    plt.tight_layout()
 
     f.savefig("sd_r_fig.pdf")
