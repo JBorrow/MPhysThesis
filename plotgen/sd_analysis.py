@@ -7,8 +7,9 @@ import matplotlib.cm as cm
 import matplotlib.colors as col
 import survis
 import pickle
+from order_of_plots import order
 
-filename = "snapshot_100_data.pkl"
+filename = "snapshot_096_data.pkl"
 
 def get_data():
     try:
@@ -84,7 +85,7 @@ if __name__ == "__main__":
 
     sim_data = get_data()
 
-    for plot_ax, data in zip(axes, sim_data):
+    for plot_ax, data in zip(axes, order):
         plot_ax, img = plot_single(plot_ax,
                                    np.log10(sim_data[data].sd_map),
                                    data,
@@ -94,9 +95,6 @@ if __name__ == "__main__":
                                    extent)
 
 
-    # JUST FOR NOW
-    axes[6], img = plot_single(axes[6], sim_data['default'].sd_map, 'default', cmap, vmin, vmax, extent)
-    # /JUST FOR NOW
     cb = plt.colorbar(img, cax=cbar_ax, orientation='horizontal', label="log $\Sigma_{g}$ [M$_\odot$ pc$^{-2}$]")
     cb.set_ticks(np.arange(-1, 3, 0.5))
     ticklabels = [r"$\leftarrow$ -1    ", "-0.5", "0", "0.5", "1", "1.5", "2.0", r"   2.5 $\rightarrow$"]

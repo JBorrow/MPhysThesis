@@ -7,8 +7,9 @@ import matplotlib.cm as cm
 import matplotlib.colors as col
 import survis
 import pickle
+from order_of_plots import order
 
-filename = "snapshot_100_data.pkl"
+filename = "snapshot_096_data.pkl"
 
 def get_data():
     try:
@@ -21,7 +22,7 @@ def get_data():
 
 def plot_single(ax, data, name, cmap, vmin, vmax, extent, delta=3):
     colormap = cm.get_cmap(cmap)
-    colormap.set_bad("black", 0.9)     
+    colormap.set_bad("black", 1.0)     
 
     img = ax.imshow(data,
                     vmin=vmin,
@@ -83,7 +84,7 @@ if __name__ == "__main__":
 
     sim_data = get_data()
 
-    for plot_ax, data in zip(axes, sim_data):
+    for plot_ax, data in zip(axes, order):
         plot_ax, img = plot_single(plot_ax,
                                    sim_data[data].Q_map,
                                    data,
@@ -93,9 +94,6 @@ if __name__ == "__main__":
                                    extent)
 
 
-    # JUST FOR NOW
-    axes[6], img = plot_single(axes[6], sim_data['default'].Q_map, 'default', cmap, vmin, vmax, extent)
-    # /JUST FOR NOW
     cb = plt.colorbar(img, cax=cbar_ax, orientation='horizontal', label="Toomre $Q$")
     cb.set_ticks(np.arange(0, 2, 0.25))
     ticklabels = ["0", "0.25", "0.5", "0.75", "1.0", "1.25", "1.5", r"   1.75 $\rightarrow$"]
