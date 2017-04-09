@@ -7,7 +7,7 @@ import pickle
 from tqdm import tqdm
 
 # ---- Global Parameters
-snapshot = 100
+snapshot = 96
 bbox_x = [-40, 40]
 bbox_y = bbox_x
 res_elem_lr = 0.5
