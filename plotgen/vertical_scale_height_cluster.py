@@ -6,6 +6,16 @@ import os
 import pickle
 from tqdm import tqdm
 
+# ---- Global Parameters
+snapshot = 97
+bbox_x = [-40, 40]
+bbox_y = bbox_x
+res_elem_lr = 0.5
+res_elem_nr = 0.2
+res_lr = survis.helper.get_res(res_elem_lr, bbox_x, bbox_y)
+res_nr = survis.helper.get_res(res_elem_nr, bbox_x, bbox_y)
+# ----------------------
+
 
 def grab_names():
     """ The simulations live in a directory where they are the only directories
@@ -96,24 +106,18 @@ class Vertical(object):
 
 if __name__ == "__main__":
     # Run in scripting mode, and actually perform the analysis
-    simulation = 97
     output = {}
 
     for simulation in tqdm(grab_names()):
         filename = "{}/snapshot_{:03d}.hdf5".format(simulation, snapshot)
         tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
 
-        try:
-            if "lowres" in simulation:
-                data = Vertical(filename, res_lr, bbox_x, bbox_y)
-            else:
-                data = Vertical(filename, res_hr, bbox_x, bbox_y)
-            tqdm.write("Analysis of {} {} successful.".format(simulation, snapshot))
-        except:
-            print("Snapshot {} {} not found, skipping.".format(simulation, snapshot))
-            continue
-        
-
+        if "lowres" in simulation:
+            data = Vertical(filename, res_lr, bbox_x, bbox_y)
+        else:
+            data = Vertical(filename, res_hr, bbox_x, bbox_y)
+        tqdm.write("Analysis of {} {} successful.".format(simulation, snapshot))
+    
         output[simulation] = data
 
     # Now we pickle the data ready for download
