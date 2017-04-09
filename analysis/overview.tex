@@ -1,12 +1,3 @@
-\begin{figure}[!ht]
-    \savebox{\graphicsbox}{\includegraphics[trim={1.95cm 1.9cm 1.9cm 1.9cm}]{sd_simulation.pdf}}% Store image
-    \leavevmode\rlap{\usebox{\graphicsbox}}% Set image with complete overlap
-    \begin{minipage}[b]{0.63\wd\graphicsbox}% Insert caption
-        \caption{The surface density (in gas only) of each of the runs from Table \ref{tab:sims} is shown, with colour encoding surface density. Note that the colourmap is cut off below $0.1 \msun \pc^{-2}$ and above $1000 \msun \pc^{-2}$ for clarity. Spiral structure has formed in the {\tt custom} runs with density waves permeating the whole galaxy, whereas the {\tt default} runs have remained relatively uniform.}
-        \label{fig:toomqsimbigfig}
-    \end{minipage}\hspace*{0.33\wd\graphicsbox}% Add space to represent figure width
-\end{figure}
-
 The simulations in \S\ref{chap:sims} are analysed using a custom python module, \sv. 
 More details about the technical implementation of the analysis module are provided in appendix \ref{app:survis}.
 Using \sv, the following aspects of the simulations are studied
@@ -16,5 +7,3 @@ Using \sv, the following aspects of the simulations are studied
 \item The evolution of scale height of the disks, as well as the difference between scale height and local \citet{jeans_stability_1902} length.
 \end{itemize}
 Through these aspects of the simulations it is possible to uncover the stability of the disks with time, their overall properties, and how it is that they become stable relative to the initial conditions.
-
-

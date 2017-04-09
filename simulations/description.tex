@@ -15,3 +15,25 @@ The density of the halo as a function of radius is
     \label{eqn:nfw}
 \end{equation}
 the NFW profile.
+
+The runs also have a fixed total mass in the disk, of $8\times10^{10} \msun$ to reproduce approximately the mass of the Milky Way.
+The disks are initialised with an exponential profile, with scale radius $3$ kpc for both stellar and gaseous material.
+The scale height of the gas is initialised to be 2 kpc, with the stellar component initially having a scale height of 0.3 kpc.
+
+\subsection{Resolution Dependence}
+
+The simulations are shown after $\approx 2$ Gyr of evolution in Figure \ref{fig:sdbig}. At first glance, the simulations appear to be approximately resolution-independent, relaxing to a similar disk realtively quickly.
+
+Of particlar interest is the scale height of the disk between the {\tt custom\_lowres}, {\tt custom}, and {\tt custom\_highres} runs.
+
+
+\begin{figure}[!ht]
+    \savebox{\graphicsbox}{\includegraphics[trim={1.95cm 1.9cm 1.9cm 1.9cm}]{sd_simulation.pdf}}% Store image
+    \leavevmode\rlap{\usebox{\graphicsbox}}% Set image with complete overlap
+    \begin{minipage}[b]{0.63\wd\graphicsbox}% Insert caption
+        \caption{The surface density (in gas only) of each of the runs from Table \ref{tab:sims} is shown, with colour encoding surface density. Note that the colourmap is cut off below $0.1 \msun \pc^{-2}$ and above $1000 \msun \pc^{-2}$ for clarity. Spiral structure has formed in the {\tt custom} runs with density waves permeating the whole galaxy, whereas the {\tt default} runs have remained relatively uniform.}
+        \label{fig:sdbig}
+    \end{minipage}\hspace*{0.33\wd\graphicsbox}% Add space to represent figure width
+\end{figure}
+
+
