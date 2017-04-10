@@ -44,7 +44,7 @@ def sig_g_custom(r, Q=Qmarg):
     """ Expected Sigma_Gas as a function of radius for a constant Toomre Q
         Parameter Q. """
 
-    this_pref = (np.sqrt(2) * mart_pref)/(np.pi * G * Q  * (1./5.)*(3 + 2./fg))
+    this_pref = (np.sqrt(2) * mart_pref)/(np.pi * G * Q  * (1./fg))
     v = np.sqrt(G * m_nfw(r)/(r**3))
 
     return (this_pref * v)**(5/4)
@@ -56,7 +56,7 @@ def sig_g_default(r, Q=Qmarg):
     v = np.sqrt(G * m_nfw(r)/(r**3))
     sound_speed = np.sqrt((5./3.)*1.38e-23*1e4/1.67e-27)/1e3
 
-    return (sound_speed * np.sqrt(2)* v)/(np.pi * G * Q * (1./5.)*(3 + 2./fg))
+    return (sound_speed * np.sqrt(2)* v * 5)/(np.pi * G * Q * (3 + 2./fg))
 
 
 def exp_profile(r):
@@ -69,7 +69,7 @@ def Q_sg_r_custom(sg, r):
     """ Used to generate the background colour map, gives Q as a function of
         surface density and radius, for a given galaxy. """
 
-    this_pref = (np.sqrt(2) * mart_pref * 5)/(np.pi * G * (3 + 2./fg) * (sg*1e6)**(4/5))
+    this_pref = (np.sqrt(2) * mart_pref)/(np.pi * G * (1./fg) * (sg*1e6)**(4/5))
     v = np.sqrt(G * m_nfw(r)/(r**3))
 
     return (this_pref * v)
@@ -80,7 +80,7 @@ def Q_sg_r_default(sg, r):
     v = np.sqrt(G * m_nfw(r)/(r**3))
     sound_speed = np.sqrt((5./3.)*1.38e-23*1e4/1.67e-27)/1e3
 
-    return (sound_speed *np.sqrt(2)* v)/(np.pi * G * (sg*1e6) * (1./5.)*(3 + 2./fg))
+    return (sound_speed *np.sqrt(2)* v*5)/(np.pi * G * (sg*1e6) *(3+2./fg))
 
 
 def generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds, Qfunc=Q_sg_r_custom):
@@ -167,7 +167,7 @@ if __name__ == "__main__":
 
     rmin = 0
     rmax = 15
-    sdmin = 1
+    sdmin = 0.5
     sdmax = 100
     bins = 25
     ds, dr = 0.005, 0.005
@@ -185,13 +185,13 @@ if __name__ == "__main__":
     gas200, err200 = get_plottable_exp("martizzi_eos_200.hdf5", bins=bins)
     gas200_d, err200_d = get_plottable_exp("default_200.hdf5", bins=bins)
 
-    ax_custom.errorbar(np.arange(len(gas0))*(30/bins), gas0/1e6, yerr=5*err0/1e6, fmt="o", ms=3, label="$t=0$")
-    ax_custom.errorbar(np.arange(len(gas100))*(30/bins), gas100/1e6, yerr=5*err100/1e6, fmt="o", ms=3, label="$t=2$ Gyr")
-    ax_custom.errorbar(np.arange(len(gas200))*(30/bins), gas200/1e6, yerr=5*err200/1e6, fmt="o", ms=3, label="$t=4$ Gyr")
+    ax_custom.errorbar(np.arange(len(gas0))*(20/bins), gas0/1e6, yerr=5*err0/1e6, fmt="o", ms=2, label="$t=0$")
+    ax_custom.errorbar(np.arange(len(gas100))*(20/bins), gas100/1e6, yerr=5*err100/1e6, fmt="o", ms=2, label="$t=2$ Gyr")
+    ax_custom.errorbar(np.arange(len(gas200))*(20/bins), gas200/1e6, yerr=5*err200/1e6, fmt="o", ms=2, label="$t=4$ Gyr")
 
-    ax_default.errorbar(np.arange(len(gas0))*(30/bins), gas0/1e6, yerr=5*err0/1e6, fmt="o", ms=3, label="$t=0$")
-    ax_default.errorbar(np.arange(len(gas100_d))*(30/bins), gas100/1e6, yerr=5*err100_d/1e6, fmt="o", ms=3, label="$t=2$ Gyr")
-    ax_default.errorbar(np.arange(len(gas200_d))*(30/bins), gas200/1e6, yerr=5*err200_d/1e6, fmt="o", ms=3, label="$t=4$ Gyr")
+    ax_default.errorbar(np.arange(len(gas0))*(20/bins), gas0/1e6, yerr=5*err0/1e6, fmt="o", ms=2, label="$t=0$")
+    ax_default.errorbar(np.arange(len(gas100_d))*(20/bins), gas100_d/1e6, yerr=5*err100_d/1e6, fmt="o", ms=2, label="$t=2$ Gyr")
+    ax_default.errorbar(np.arange(len(gas200_d))*(20/bins), gas200_d/1e6, yerr=5*err200_d/1e6, fmt="o", ms=2, label="$t=4$ Gyr")
 
 
     # Generate the backgorund colormap
@@ -201,6 +201,7 @@ if __name__ == "__main__":
               vmin=0,
               vmax=2,
               cmap="Spectral",
+              alpha=0.5,
               aspect="auto")
 
     image_data_default = generate_background_matrix(rmin, rmax, sdmin, sdmax, dr, ds, Q_sg_r_default)
@@ -209,6 +210,7 @@ if __name__ == "__main__":
               vmin=0,
               vmax=2,
               cmap="Spectral",
+              alpha=0.5,
               aspect="auto")
 
 
