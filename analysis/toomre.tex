@@ -19,6 +19,13 @@ It also follows from the model that the spiral arms should be the sites of star 
 The marginally-stable nature of the disks also, promisingly, produces spiral-like featrures in the simulations.
 There are transient spiral structures in all of the {\tt custom} runs, in particular the {\tt custom\_gasonly} run has a very strong spiral arm.
 These spiral structures are mainly supported through the transport of mass into the center.
-The galaxies form Toomre-unstable clumps on <SOME TIMESCALE> timescales, and as these clumps are being moved into the center of the galaxy they are subjected to shocks and shears that tear them apart to form the spiral structure.
+The galaxies form Toomre-unstable clumps very quickly ($<0.05$ Gyr), and as these clumps are being moved into the center of the galaxy they are subjected to shocks and shears that tear them apart to form the spiral structure.
 This evolution is shown in more detail in Figure \ref{fig:sd_evo_small} for the {\tt custom} model.
+
+\begin{figure}
+    \centering
+    \includegraphics{toomre_q_data.pdf}
+    \caption{The evolution of the surface density of the disks as a funciton time, with the theoretical predictions shown as a colourmap in the background. Note that the {\tt custom} run is shown on the left and the {\tt default} shown on the right. The {\tt custom} colourmap in the background has been changed to use that $\Sigma_Q = \sst + \sg$ rather than the more complex form shown in \S \ref{sec:toom}, this is because the low pressure support in the gaseous disk allows it to couple strongly to the considerably more massive stellar component. This coupling prevents the hydrodynamic forces from having their maximal effect, and leads to $\sigma_*/\sigma_g \approx 1$ for the relevant velocity dispersions of the particles. This leads to a lower predicted surface density for the outer regions as the lower support makes them more susceptable to gravitational instability. Note how the curves tend to relax towards the $Q\approx1$ line, even in the case of the {\tt default} model where the variations in local $Q$ are significantly smaller than in the {\tt custom} model.}
+    \label{fig:toomreqthr}
+\end{figure}
 
