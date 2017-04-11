@@ -111,5 +111,5 @@ if __name__ == "__main__":
         fig.show()
         input()
     else:
-        plt.savefig("plotgen/sd_simulation.pdf", dpi=300)
+        plt.savefig("plotgen/sd_evo_simulation.pdf", dpi=300)
                                    

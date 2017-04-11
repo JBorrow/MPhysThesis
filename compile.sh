@@ -11,6 +11,7 @@ if [[ "$1" == "--figs" ]]; then
     python3 plotgen/bigiel_overplot.py
     python3 plotgen/sd_analysis.py
     python3 plotgen/toomre_q_with_data.py
+    python3 plotgen/evolution.py
 fi
 
 echo " --##--##--##--##--##--##--##--##--##--##--##--##--##--##--##-- "
