@@ -179,11 +179,18 @@ if __name__ == "__main__":
     #ax.plot(r, exp_profile(r)/1e6, label=r"Traditional exponential", ls="dotted")
 
     # Simulation data
-    gas0, err0 = get_plottable_exp("martizzi_eos_000.hdf5", bins=bins)
-    gas100, err100 = get_plottable_exp("martizzi_eos_100.hdf5", bins=bins)
-    gas100_d, err100_d = get_plottable_exp("default_100.hdf5", bins=bins)
-    gas200, err200 = get_plottable_exp("martizzi_eos_200.hdf5", bins=bins)
-    gas200_d, err200_d = get_plottable_exp("default_200.hdf5", bins=bins)
+    try:
+        gas0, err0 = get_plottable_exp("martizzi_eos_000.hdf5", bins=bins)
+        gas100, err100 = get_plottable_exp("martizzi_eos_100.hdf5", bins=bins)
+        gas100_d, err100_d = get_plottable_exp("default_100.hdf5", bins=bins)
+        gas200, err200 = get_plottable_exp("martizzi_eos_200.hdf5", bins=bins)
+        gas200_d, err200_d = get_plottable_exp("default_200.hdf5", bins=bins)
+    except:  # sadly we must use catch-all as wrong file does not sound a nice exception
+        gas0, err0 = get_plottable_exp("plotgen/martizzi_eos_000.hdf5", bins=bins)
+        gas100, err100 = get_plottable_exp("plotgen/martizzi_eos_100.hdf5", bins=bins)
+        gas100_d, err100_d = get_plottable_exp("plotgen/default_100.hdf5", bins=bins)
+        gas200, err200 = get_plottable_exp("plotgen/martizzi_eos_200.hdf5", bins=bins)
+        gas200_d, err200_d = get_plottable_exp("plotgen/default_200.hdf5", bins=bins)
 
     ax_custom.errorbar(np.arange(len(gas0))*(20/bins), gas0/1e6, yerr=5*err0/1e6, fmt="o", ms=2, label="$t=0$")
     ax_custom.errorbar(np.arange(len(gas100))*(20/bins), gas100/1e6, yerr=5*err100/1e6, fmt="o", ms=2, label="$t=2$ Gyr")
@@ -225,6 +232,8 @@ if __name__ == "__main__":
     ax_custom.set_ylabel("Surface density [$M_\odot$ pc$^{-2}$]")
 
     plt.colorbar(im_custom, label="Toomre $Q$", cax=ax_cb)
+    
+    ax_default.legend()
 
     plt.tight_layout()
 
@@ -233,4 +242,4 @@ if __name__ == "__main__":
     if "--showfig" in sys.argv:
         plt.show()
     else:
-        plt.savefig("plotgen/toomre_q_theory.pdf", dpi=300)
+        plt.savefig("plotgen/toomre_q_data.pdf", dpi=300)
