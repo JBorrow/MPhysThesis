@@ -24,7 +24,7 @@ if __name__ == "__main__":
     for simulation in order:
         this_sim = raw_data[simulation]
         print(this_sim.Z)
-        ax.plot(this_sim.r, abs(np.array(this_sim.lZ)), label=simulation)
+        ax.errorbar(this_sim.r, abs(np.array(this_sim.Z)), yerr=this_sim.dZ, label=simulation)
 
 
     plt.legend()
