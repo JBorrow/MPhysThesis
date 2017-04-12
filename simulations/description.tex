@@ -22,9 +22,9 @@ The scale height of the gas is initialised to be 2 kpc, with the stellar compone
 
 \subsection{Resolution Dependence}
 
-The simulations are shown after $\approx 2$ Gyr of evolution in Figure \ref{fig:sdbig}. At first glance, the simulations appear to be approximately resolution-independent, relaxing to a similar disk realtively quickly.
+The simulations are shown after $\approx 2$ Gyr of evolution in Figure \ref{fig:sdbig}. At first glance, the simulations appear to be approximately resolution-independent, relaxing to a similar disk relatively quickly.
 
-Of particlar interest is the scale height of the disk between the {\tt custom\_lowres}, {\tt custom}, and {\tt custom\_highres} runs.
+Of particular interest is the scale height of the disk between the {\tt custom\_lowres}, {\tt custom}, and {\tt custom\_highres} runs.
 These are calculated by fitting an exponential profile,
 $$
     ACTUAL EQUATION
@@ -34,7 +34,7 @@ and the results are shown in Figure \ref{fig:vheighthist}.
 \begin{figure}
     \centering
     \includegraphics{v_height_hist.pdf}
-    \caption{The vertical distribution of the particles in the disk (for {\tt custom}, {\tt custom\_highres} and {\tt custom\_lowres}) after $\approx 2$ Gyr of evolution from the initial conditions. In blue and orange, the gas histogram and fit are shown, with the same for the star particles being shown in green and red. The {\tt custom\_lowres} is shown with bins ten times as wide as to normalise the overall contents of the histogram. It appears that the scale height of the gas disk is determined by the chosen softening length, as the {\tt custom\_highres} run has a considerable build up of particles within the very center of the disk. Normally, the disk is spread vertically by the ejection from supernovae explosions, and as these are not modelled in a local way in the {\tt custom} model a high degree of clumping is shown.}
+    \caption{The vertical distribution of the particles in the disk (for {\tt custom}, {\tt custom\_highres} and {\tt custom\_lowres}) after $\approx 2$ Gyr of evolution from the initial conditions. In blue and orange, the gas histogram and fit are shown, with the same for the star particles being shown in green and red. The {\tt custom\_lowres} is shown with bins ten times as wide as to normalise the overall contents of the histogram. It appears that the scale height of the gas disk is determined by the chosen softening length, as the {\tt custom\_highres} run has a considerable build up of particles within the very centre of the disk. Normally, the disk is spread vertically by the ejection from supernovae explosions, and as these are not modelled in a local way in the {\tt custom} model a high degree of clumping is shown.}
     \label{fig:vheighthist}
 \end{figure}
 
@@ -42,7 +42,7 @@ and the results are shown in Figure \ref{fig:vheighthist}.
     \savebox{\graphicsbox}{\includegraphics[trim={1.95cm 1.9cm 1.9cm 1.9cm}]{sd_simulation.pdf}}% Store image
     \leavevmode\rlap{\usebox{\graphicsbox}}% Set image with complete overlap
     \begin{minipage}[b]{0.63\wd\graphicsbox}% Insert caption
-        \caption{The surface density (in gas only) of each of the runs from Table \ref{tab:sims} is shown, with colour encoding surface density. Note that the colourmap is cut off below $0.1 \msun \pc^{-2}$ and above $1000 \msun \pc^{-2}$ for clarity. Spiral structure has formed in the {\tt custom} runs with density waves permeating the whole galaxy, whereas the {\tt default} runs have remained relatively uniform.}
+        \caption{The surface density (in gas only) of each of the runs from Table \ref{tab:sims} is shown, with colour encoding surface density. Note that the colour map is cut off below $0.1 \msun \pc^{-2}$ and above $1000 \msun \pc^{-2}$ for clarity. Spiral structure has formed in the {\tt custom} runs with density waves permeating the whole galaxy, whereas the {\tt default} runs have remained relatively uniform.}
         \label{fig:sdbig}
     \end{minipage}\hspace*{0.33\wd\graphicsbox}% Add space to represent figure width
 \end{figure}

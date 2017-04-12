@@ -29,12 +29,12 @@ Vertical Gas & Gas & $\rho(z) \propto \mathrm{sech}^2\left(\frac{z}{z_0}\right)$
 
 It is assumed that all other profiles are uniform (for example,
 \(\theta,\) \(\phi\) for the NFW profile). To actually generate the
-particle distributions, though, the jacobians such that
+particle distributions, though, the Jacobian such that
 \[
     p(r)\mathrm{d}r = \rho(r) f(r) \mathrm{d}r~,
 \]
 are required, where \(f(r)\) is some arbitrary function of \(r\) that is given by the
-jacobian. Here these are
+Jacobian. Here these are
 \[
     \mathrm{d}V_{r, \theta, \phi} = r^2\sin\phi\mathrm{d}r\mathrm{d}\theta\mathrm{d}\phi ~ ~ ~ \rightarrow ~ ~ ~ \mathrm{d}V_{r} = 4\pi r^2~,
 \] \[
@@ -57,8 +57,7 @@ which by definition is bounded by {[}0, 1{]}. Hence it is possible to invert the
 equation for \(P(z)\), i.e.~find \(z(P)\), and generate random numbers
 uniformly (\(U(0, 1)\)), which is trivial computationally, and calculate
 \(z(U(0, 1))\) which will generate random numbers with the distribution
-\(p(z)\)\footnote{Clearly, these are pseudorandom numbers, but this is
-  not important for the discussion here.}.
+\(p(z)\)\footnote{It does not matter that these are pseudorandom numbers as the particles will be quickly displaced from their initial positions.}.
 
 This requires that it is possible to:
 \begin{itemize}
