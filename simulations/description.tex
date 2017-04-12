@@ -25,7 +25,18 @@ The scale height of the gas is initialised to be 2 kpc, with the stellar compone
 The simulations are shown after $\approx 2$ Gyr of evolution in Figure \ref{fig:sdbig}. At first glance, the simulations appear to be approximately resolution-independent, relaxing to a similar disk realtively quickly.
 
 Of particlar interest is the scale height of the disk between the {\tt custom\_lowres}, {\tt custom}, and {\tt custom\_highres} runs.
+These are calculated by fitting an exponential profile,
+$$
+    ACTUAL EQUATION
+$$
+and the results are shown in Figure \ref{fig:vheighthist}.
 
+\begin{figure}
+    \centering
+    \includegraphics{v_height_hist.pdf}
+    \caption{The vertical distribution of the gas particles in the disk (for {\tt custom}, {\tt custom\_highres} and {\tt custom\_lowres}) after $\approx 2$ Gyr of evolution from the initial conditions. The {\tt custom\_lowres} is shown with bins ten times as wide as to normalise the overall contents of the histogram. It appears that the scale height of the disk is determined by the chosen softening length, as the {\tt custom\_highres} run has a considerable build up of particles within the very center of the disk. Normally, the disk is spread vertically by the ejection from supernovae explosions, and as these are not modelled in a local way in the {\tt custom} model a high degree of clumping is shown.}
+    \label{fig:vheighthist}
+\end{figure}
 
 \begin{figure}[!ht]
     \savebox{\graphicsbox}{\includegraphics[trim={1.95cm 1.9cm 1.9cm 1.9cm}]{sd_simulation.pdf}}% Store image
