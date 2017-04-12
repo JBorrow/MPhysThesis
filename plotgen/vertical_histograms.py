@@ -44,8 +44,10 @@ class Vertical(object):
         self.sf = sf  #scale factor
 
         self.z_data = data.gas['Coordinates'][:, 2]
+        self.z_data_stars = data.star['Coordinates'][:, 2]
 
         self.popt, self.pcov = self.get_scale_height(self.z_data, nbins=1000)
+        self.popt_star, self.pcov_star = self.get_scale_height(self.z_data_stars, nbins=1000)
 
         return
 
@@ -74,13 +76,14 @@ class Vertical(object):
 
 
     def make_histogram(self, ax, nbins=1000, max=0.2, min=-0.2, name="", namemax=800):
-        ax.hist(self.z_data, bins=int(1000/self.sf), range=(min, max))
-
         x_data = np.arange(min, max, (max - min)/nbins)
-        y_data = self.to_fit(x_data, self.popt[0], self.popt[1], self.popt[2])
-        ax.plot(x_data, y_data)
 
-        ax.text(min+0.02, namemax-100, "$Z = {:2.1f}$ pc\n{}".format(1000*self.popt[1], name), fontsize=8)
+        for z, popt in zip([self.z_data, self.z_data_stars], [self.popt, self.popt_star]):
+            ax.hist(z, bins=int(1000/self.sf), range=(min, max), alpha=0.5)
+            y_data = self.to_fit(x_data, popt[0], popt[1], popt[2])
+            ax.plot(x_data, y_data)
+
+        ax.text(min+0.02, namemax-150, "$Z_g = {:2.1f}$ pc\n$Z_* = {:3.0f}$ pc\n{}".format(1000*self.popt[1], abs(self.popt_star[1]*1000), name), fontsize=8)
 
         ax.set_xlim(min, max)
 
