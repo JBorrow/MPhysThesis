@@ -14,13 +14,13 @@ This highlights three main problems with the simulations in this work, namely th
     \item The stars are only tracers, rather than actually being formed in the simulation, and as such gas cannot be consumed and the gas fraction cannot be lowered.
 \end{itemize}
 In the {\tt custom} model in partuclar, this leads to a build-up of mass in the center of the galaxy which is unphysical; the build-up however can not be separated from the effects of the model without considerable further work.
-The predictions in \S \ref{sec:toom_theory} suggest that whilst there should be a build-up of mass in the center, it should not be at the $\approx 80\%$ levels that are seen in the {\tt custom} runs.
-Those predictions are shown against the simulation data in Figure \ref{fig:sim_theory_Q}.
+The predictions in \S \ref{sec:sigrpred} suggest that whilst there should be a build-up of mass in the center, it should not be at the $\approx 80\%$ levels that are seen in the {\tt custom} runs.
+Those predictions are shown against the simulation data in Figure \ref{fig:toomreqthr_dat}.
 
 The work of \citet{krumholz_is_2016} suggests that it is this transport of mass into the center of the galaxy that is the stabalising factor, rather than the effective equation of state of the gas.
 This work would dispute that; whilst there is mass transport into the center of the galaxy this is only because in simulations the initial conditions do not fit with the galaxy being marginally stable.
 The gas is transported into the center such that the galaxy can fit the $Q\approx1$ $\sg(r)$ curve which is considerably different from the initial conditions of an exponential disk.
-This curve, as shown in \S \ref{sec:toom_theory}, depends on the underlying dark matter structure of the galaxy and the sound speed of the gas.
+This curve, as shown in \S \ref{sec:sigrpred}, depends on the underlying dark matter structure of the galaxy and the sound speed of the gas.
 
 It could be suggested that for an equation of state to be considered valid, it must be able to reproduce the roughly exponential surface density curves that are seen in nature.
 Under such a situation, the processes that provide extra pressure to the gas (cosmic rays, magnetic fields, star formation), would allow the galaxy to be marginally stable and yet still reproduce an exponential surface density profile.
@@ -28,7 +28,7 @@ Under such a situation, the processes that provide extra pressure to the gas (co
 \begin{figure}[!ht]
     \centering
     \includegraphics{sd_r_fig.pdf}
-    \caption{The evolution of the (gaseous) mass contained within various shells (see legend) is shown. On the left, the {\tt custom} run is show, with the {\tt default} run being shown on the right. It is clear from this figure that the {\tt custom} model causes a large proportion of the gas to be transported into the center of the galaxy; over 80\% of the gas particles falling into this central region within 1 Gyr of the simulation beginning. This is unsurprising as the Toomre $Q$ parameter for the disk in the initial conditions was extremely low (see the discussion in \S \ref{sec:toom_theory} due to the low pressure support that the {\tt custom} model provides.}
+    \caption{The evolution of the (gaseous) mass contained within various shells (see legend) is shown. On the left, the {\tt custom} run is show, with the {\tt default} run being shown on the right. It is clear from this figure that the {\tt custom} model causes a large proportion of the gas to be transported into the center of the galaxy; over 80\% of the gas particles falling into this central region within 1 Gyr of the simulation beginning. This is unsurprising as the Toomre $Q$ parameter for the disk in the initial conditions was extremely low (see the discussion in \S \ref{sec:sigrpred} due to the low pressure support that the {\tt custom} model provides.}
     \label{fig:sd_r_evo}
 \end{figure}
 
