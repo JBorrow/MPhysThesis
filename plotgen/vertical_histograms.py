@@ -184,6 +184,7 @@ if __name__ == "__main__":
     axes[1, 0].yaxis.set_major_locator(MaxNLocator(nbins=nbinsy, prune='upper'))
 
     axes[1, 1].set_xlabel("Height above midplane [kpc]")
+    axes[0, 0].set_ylabel("Number of particles in bin")
 
     plt.tight_layout()
     f.subplots_adjust(wspace=0, hspace=0)
