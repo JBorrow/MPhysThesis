@@ -163,22 +163,29 @@ if __name__ == "__main__":
         else:
             label = simulation
 
-        data.make_histogram(ax, name=label, namemax=85)
+        data.make_histogram(ax, name=label, namemax=82)
 
         ax.set_ylim(0, 100)
 
+
+    axes[0, 0].tick_params(labelbottom='off')
+    axes[0, 1].tick_params(labelbottom='off', labelleft='off')
+    axes[0, 2].tick_params(labelbottom='off', labelleft='off')
+    axes[1, 1].tick_params(labelleft='off')
+    axes[1, 2].tick_params(labelleft='off')
+
     # Remove extra stuff
-    """
 
-    nbins = len(axes[0].get_xticklabels())
-    axes[0].xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
-    axes[1].xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
-    axes[2].xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
+    nbins = len(axes[1, 0].get_xticklabels())
+    nbinsy = len(axes[1, 0].get_yticklabels())
+    axes[1, 0].xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
+    axes[1, 1].xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
+    axes[1, 2].xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
+    axes[1, 0].yaxis.set_major_locator(MaxNLocator(nbins=nbinsy, prune='upper'))
 
-    axes[1].set_xlabel("Height above midplane [kpc]")
-    axes[0].set_ylabel("Number of particles in bin")
-"""
+    axes[1, 1].set_xlabel("Height above midplane [kpc]")
+
     plt.tight_layout()
-    f.subplots_adjust(wspace=0)
+    f.subplots_adjust(wspace=0, hspace=0)
 
     f.savefig('v_height_hist.pdf', dpi=600)
