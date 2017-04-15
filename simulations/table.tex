@@ -1,6 +1,7 @@
-\begin{table}
+\begin{table}[!ht]
     \centering
 
+    \resizebox{\textwidth}{!}{
     \begin{tabular}{l|c|c|c|c|c}
 
     Name & $N_{Part}$ & $\fgas$ & $M_g$ [$\msun$] & Softening Gas/Stars [kpc] & Equation of State \\
@@ -13,7 +14,7 @@
     {\tt default\_gasonly} & 2e5 & 0.5 & 4e10 & 0.2/0.2 & Default \\
     {\tt default\_lowres} & 2e4 & 0.1 & 8e9 & 0.2/0.2 & Default \\
 
-    \end{tabular}
+    \end{tabular}}
 
     \caption{Simulations and their reference names. The parmaterfiles can be found in the GitHub repository available at \protect\url{https://github.com/JBorrow/MPhysProjectConfigs}}
     \label{tab:sims}

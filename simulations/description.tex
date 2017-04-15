@@ -1,3 +1,12 @@
+\begin{figure}[!ht]
+    \savebox{\graphicsbox}{\includegraphics[trim={1.95cm 1.5cm 1.9cm 1.9cm}]{sd_simulation.pdf}}% Store image
+    \leavevmode\rlap{\usebox{\graphicsbox}}% Set image with complete overlap
+    \begin{minipage}[b]{0.63\wd\graphicsbox}% Insert caption
+        \caption{The surface density (in gas only) of each of the runs from Table \ref{tab:sims} is shown, with colour encoding surface density. Note that the colour map is cut off below $10^{-1} \msun \pc^{-2}$ and above $10^3 \msun \pc^{-2}$ for clarity. Spiral structure has formed in the {\tt custom} runs with density waves permeating the whole galaxy, whereas the {\tt default} runs have remained uniform.}
+        \label{fig:sdbig}
+    \end{minipage}\hspace*{0.33\wd\graphicsbox}% Add space to represent figure width
+\end{figure}
+
 All simulations were ran with the same fixed NFW profile with the following parameters:
 \begin{itemize}
     \item $c = 20.1$
@@ -19,32 +28,28 @@ the NFW profile.
 The runs also have a fixed total mass in the disk, of $8\times10^{10} \msun$ to reproduce approximately the mass of the Milky Way.
 The disks are initialised with an exponential profile, with scale radius $3$ kpc for both stellar and gaseous material.
 The scale height of the gas is initialised to be 2 kpc, with the stellar component initially having a scale height of 0.3 kpc.
+The simulations are shown after $\approx 2$ Gyr of evolution in Figure \ref{fig:sdbig}. 
 
 \subsection{Resolution Dependence}
 
-The simulations are shown after $\approx 2$ Gyr of evolution in Figure \ref{fig:sdbig}. At first glance, the simulations appear to be approximately resolution-independent, relaxing to a similar disk relatively quickly.
+At first glance, the simulations appear to be approximately resolution-independent, relaxing to a similar disk relatively quickly.
 
 Of particular interest is the scale height of the disk between the {\tt custom\_lowres}, {\tt custom}, and {\tt custom\_highres} runs.
 These are calculated by fitting an exponential profile,
 $$
-    ACTUAL EQUATION
+    \rho_x(z) \propto \mathrm{sech}^2\left(z/Z_x\right)
 $$
-and the results are shown in Figure \ref{fig:vheighthist}.
+with $Z_x$ the scale height for component $x$. The results are shown in Figure \ref{fig:vheighthist}.
+
+The differences between the two regimes can be understood through a simple \citet{jeans_stability_1902} analysis; the central regions have a considerably higher density and hence smaller Jeans length.
+This, according to \citet{schaye_model-independent_2001}, implies that the scale height should be considerably smaller.
+It is possible to use the simulations as a test of the aforementioned work, by calculating the local 3D density ($\rho_g$), surface density ($\sg$), and Jeans' length ($L_J$).
+These values are presented in Table \ref{tab:schaye_test}.
+
 
 \begin{figure}
     \centering
     \includegraphics{v_height_hist.pdf}
-    \caption{The vertical distribution of the particles in the disk (for {\tt custom}, {\tt custom\_highres} and {\tt custom\_lowres}) after $\approx 2$ Gyr of evolution from the initial conditions. The top set of histograms encompasses all of the data, whereas the bottom set exclude the particles residing within the inner $0.5$ kpc of the galaxy. In blue and orange, the gas histogram and fit are shown, with the same for the star particles being shown in green and red. The fits use the density profile in Equation \ref{eqn:vertprofile}, with $Z_g$ the scale height of the gas and $Z_*$ the scale height of the stellar disk. The {\tt custom\_lowres} is shown with bins ten times as wide as to normalise the overall contents of the histogram. It appears that the scale height of the gas disk is determined by the chosen softening length, as the {\tt custom\_highres} run has a considerable build up of particles within the very centre of the disk. Normally, the disk is spread vertically by the ejection from supernovae explosions, and as these are not modelled in a local way in the {\tt custom} model a high degree of clumping is shown. From the splitting of the histograms, it is clear that there are two regimes here; the inner $\approx 0.5$ kpc, and the rest of the galaxy. The inner region (see Figure \ref{fig::sd_r}) contains the majority of the mass in the galaxy, and as such the gaseous disk is highly compressed (the {\tt custom\_highres} run shows this in most detail because of the smaller gravitational softening). This suggests that the model presented in this work does not account for all of the dynamics in the galaxy, which is to be expected as there are several key components missing (see \S \ref{sec:missing}).}
+    \caption{The vertical distribution of the particles in the disk (for {\tt custom}, {\tt custom\_highres} and {\tt custom\_lowres}) after $\approx 2$ Gyr of evolution from the initial conditions. The top set of histograms encompasses all of the data, whereas the bottom set exclude the particles residing within the inner $0.5$ kpc of the galaxy. In blue and orange, the gas histogram and fit are shown, with the same for the star particles being shown in green and red. The fits use the density profile in Equation \ref{eqn:vertprofile}, with $Z_g$ the scale height of the gas and $Z_*$ the scale height of the stellar disk. The {\tt custom\_lowres} is shown with bins ten times as wide as to normalise the overall contents of the histogram. It appears that the scale height of the gas disk is determined by the chosen softening length, as the {\tt custom\_highres} run has a considerable build up of particles within the very centre of the disk. Normally, the disk is spread vertically by the ejection from supernovae explosions, and as these are not modelled in a local way in the {\tt custom} model a high degree of clumping is shown. From the splitting of the histograms, it is clear that there are two regimes here; the inner $\approx 0.5$ kpc, and the rest of the galaxy. The inner region (see Figure \ref{fig:sd_r}) contains the majority of the mass in the galaxy, and as such the gaseous disk is highly compressed (the {\tt custom\_highres} run shows this in most detail because of the smaller gravitational softening). This suggests that the model presented in this work does not account for all of the dynamics in the galaxy, which is to be expected as there are several key components missing (see \S \ref{sec:missing}).}
     \label{fig:vheighthist}
 \end{figure}
-
-\begin{figure}[!ht]
-    \savebox{\graphicsbox}{\includegraphics[trim={1.95cm 1.9cm 1.9cm 1.9cm}]{sd_simulation.pdf}}% Store image
-    \leavevmode\rlap{\usebox{\graphicsbox}}% Set image with complete overlap
-    \begin{minipage}[b]{0.63\wd\graphicsbox}% Insert caption
-        \caption{The surface density (in gas only) of each of the runs from Table \ref{tab:sims} is shown, with colour encoding surface density. Note that the colour map is cut off below $0.1 \msun \pc^{-2}$ and above $1000 \msun \pc^{-2}$ for clarity. Spiral structure has formed in the {\tt custom} runs with density waves permeating the whole galaxy, whereas the {\tt default} runs have remained relatively uniform.}
-        \label{fig:sdbig}
-    \end{minipage}\hspace*{0.33\wd\graphicsbox}% Add space to represent figure width
-\end{figure}
-
-
