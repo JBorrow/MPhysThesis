@@ -46,6 +46,25 @@ This, according to \citet{schaye_model-independent_2001}, implies that the scale
 It is possible to use the simulations as a test of the aforementioned work, by calculating the local 3D density ($\rho_g$), surface density ($\sg$), and Jeans' length ($L_J$).
 These values are presented in Table \ref{tab:schaye_test}.
 
+\begin{table}
+    \centering
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l|c|c|c|c|c|c}
+        Run & Range & $\rho_g$ [n$_H$ cm$^{-3}$] & $\sg$ [$\msun \pc^{-2}$] & $\sg/\rho_g$ [pc] & $L_J$ [pc] & $Z_g$ [pc] \\
+        \hline
+        {\tt custom} & $r<0.5$ kpc & & & & & \\
+        {\tt custom\_highres} & $r<0.5$ kpc & & & & & \\
+        {\tt custom\_lowres} & $r<0.5$ kpc & & & & & \\
+        {\tt custom IC} & $r<0.5$ kpc & & & & & \\
+        {\tt custom} & $r>0.5$ kpc & & & & \\
+        {\tt custom\_highres} & $r>0.5$ kpc & & & & & \\
+        {\tt custom\_lowres} & $r>0.5$ kpc & & & & & \\
+        {\tt custom IC} & $r>0.5$ kpc & & & & & \\
+\end{tabular}}
+    \caption{Values comparing possible measures of scale height for the different runs.}
+    \label{tab:schaye_test}
+\end{table}
+
 
 \begin{figure}
     \centering
