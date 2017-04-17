@@ -48,8 +48,8 @@ class Vertical(object):
         rads = np.sqrt(np.sum(np.square(data.gas['Coordinates']), 1))
         rads_star = np.sqrt(np.sum(np.square(data.star['Coordinates']), 1))
 
-        mask = np.logical_and((rads < inner), (rads > outer))
-        mask_star = np.logical_and((rads_star < inner), (rads_star > outer))
+        mask = np.logical_or((rads < inner), (rads > outer))
+        mask_star = np.logical_or((rads_star < inner), (rads_star > outer))
 
         dens = data.gas['Density']
         self.gas_mass_res = data.gas_mass
@@ -119,7 +119,7 @@ class Vertical(object):
     def local_surface_density(self):
         n = len(self.z_data)
 
-        area = np.pi * 2 * (self.outer**2 - self.inner**2) / 1e6
+        area = np.pi * 2 * (self.outer**2 - self.inner**2) * 1e6
 
         return n * self.gas_mass_res / area
 
@@ -131,7 +131,7 @@ class Vertical(object):
         rho_g = self.local_density_mean()
         sg = self.local_surface_density()
 
-        expected_lj = sg/(rho_g * 1e3)  # in pc
+        expected_lj = (sg/(rho_g))*1e3  # in pc
 
 
         print("rho: {} nh/cm3, sg: {} ms/pc2, sg/rho: {} pc, Z: {} pc".format(
@@ -171,9 +171,9 @@ if __name__ == "__main__":
         tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
 
         if "lowres" in simulation:
-            data = Vertical(filename, res_lr, bbox_x, bbox_y, sf=10, inner=0.5, outer=100)
+            data = Vertical(filename, res_lr, bbox_x, bbox_y, sf=10, inner=0.5, outer=10)
         else:
-            data = Vertical(filename, res_nr, bbox_x, bbox_y, inner=0.5, outer=100)
+            data = Vertical(filename, res_nr, bbox_x, bbox_y, inner=0.5, outer=10)
 
         data.print_data()
     
