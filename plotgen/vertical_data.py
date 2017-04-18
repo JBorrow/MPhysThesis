@@ -19,7 +19,7 @@ res_elem_nr = 0.2
 res_lr = survis.helper.get_res(res_elem_lr, bbox_x, bbox_y)
 res_nr = survis.helper.get_res(res_elem_nr, bbox_x, bbox_y)
 
-names = ['custom', 'custom_highres', 'custom_lowres']
+names = ['custom', 'custom_highres', 'custom_lowres', 'default', 'default_lowres']
 # ----------------------
 
 
@@ -131,7 +131,7 @@ class Vertical(object):
         rho_g = self.local_density_mean()
         sg = self.local_surface_density()
 
-        expected_lj = (sg/(rho_g))*1e3  # in pc
+        expected_lj = (sg/(rho_g))*1e9  # in pc
 
 
         print("rho: {} nh/cm3, sg: {} ms/pc2, sg/rho: {} pc, Z: {} pc".format(
@@ -171,11 +171,22 @@ if __name__ == "__main__":
         tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
 
         if "lowres" in simulation:
-            data = Vertical(filename, res_lr, bbox_x, bbox_y, sf=10, inner=0.5, outer=10)
+            data = Vertical(filename, res_lr, bbox_x, bbox_y, sf=10, inner=0.5, outer=5)
         else:
-            data = Vertical(filename, res_nr, bbox_x, bbox_y, inner=0.5, outer=10)
+            data = Vertical(filename, res_nr, bbox_x, bbox_y, inner=0.5, outer=5)
 
         data.print_data()
     
         output_excl[simulation] = data
 
+
+    
+    f, axes = plt.subplots(1, 3)
+
+    for ax, sim in zip(axes, output):
+        dat = output[sim]
+
+        ax.hist(dat.dens, bins=100)
+
+
+    f.savefig("test.png")
