@@ -33,6 +33,19 @@ def disp(sg, fg=0.1):
     return 1.8 * (f/F)**(3/5) * G**(2/5) * pfm**(1/5) * fg**(-2/5) * sg**(1/5)
 
 
+def tau_sfr(rhog, fg=0.1):
+    f = 0.4
+    F = 0.5
+    pfm = 3000
+    pf = pfm*100
+
+    prefactor = 0.45 * (fg**(3./2) * F**(7/4))/(np.pi * f**(3/4) * G**(7/8) * pf**(1/4))
+
+    conversion = 3.171e-8 * 3.086e13
+
+    return prefactor * pfm * rhog**(-5/8) * conversion
+
+
 class Vertical(object):
     def __init__(self, filename, res, bbox_x, bbox_y, max_rad=30, n_bins=5, sf=1, inner=0, outer=0.5):
 
@@ -153,12 +166,13 @@ class Vertical(object):
         proj_lj = self.expected_lj_mart(sg, rho_g/1e9)
 
         if not latex:
-            print("rho: {} nh/cm3, sg: {} ms/pc2, sg/rho: {} pc, Z: {} pc, lj: {} pc".format(
+            print("rho: {} nh/cm3, sg: {} ms/pc2, sg/rho: {} pc, Z: {} pc, lj: {} pc, sfr: {} gyr".format(
                 rho_g * factor_3d_dens,
                 sg,
                 expected_lj,
                 abs(self.popt[1]) * 1e3,
-                proj_lj))
+                proj_lj,
+                tau_sfr(rho_g/1e9)/1e9))
         else:
             print("{} & {:.3g} & {:.3g} & {:.3g} & {:.3g} &  {:.3g} \\\\".format(
                 name,
