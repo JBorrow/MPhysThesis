@@ -50,16 +50,20 @@ These values are presented in Table \ref{tab:schaye_test}.
     \centering
     \resizebox{\textwidth}{!}{
     \begin{tabular}{l|c|c|c|c|c|c}
-        Run & Range & $\rho_g$ [n$_H$ cm$^{-3}$] & $\sg$ [$\msun \pc^{-2}$] & $\sg/\rho_g$ [pc] & $L_J$ [pc] & $Z_g$ [pc] \\
+        Run & Range [kpc] & $\rho_g$ [n$_H$ cm$^{-3}$] & $\sg$ [$\msun \pc^{-2}$] & $\sg/\rho_g$ [pc] & $L_J$ [pc] & $Z_g$ [pc] \\
         \hline
-        {\tt custom} & $r<0.5$ kpc & & & & & \\
-        {\tt custom\_highres} & $r<0.5$ kpc & & & & & \\
-        {\tt custom\_lowres} & $r<0.5$ kpc & & & & & \\
-        {\tt custom IC} & $r<0.5$ kpc & & & & & \\
-        {\tt custom} & $r>0.5$ kpc & & & & \\
-        {\tt custom\_highres} & $r>0.5$ kpc & & & & & \\
-        {\tt custom\_lowres} & $r>0.5$ kpc & & & & & \\
-        {\tt custom IC} & $r>0.5$ kpc & & & & & \\
+
+        {\tt custom} & $r<0.5$ & 7058.05 & 3399.60 & 19.48 & 34.68 &  26.26 \\
+        {\tt custom\_highres} & $r<0.5$ & 578831.52 & 3507.57 & 0.25 & 3.85 &  7.89 \\
+        {\tt custom\_lowres} & $r<0.5$ & 5308.95 & 3338.43 & 25.43 & 39.84 &  29.91 \\
+        {\tt default} & $r<0.5$ & 12.02 & 93.71 & 315.13 & 409.70 &  344.79 \\
+        {\tt default\_lowres} & $r<0.5$ & 5.76 & 47.36 & 332.62 & 516.53 &  260.55 \\
+        {\tt custom} & $0.5<r<5$ & 79.28 & 10.01 & 5.10 & 102.01 &  69.85 \\
+        {\tt custom\_highres} & $0.5<r<5$ & 111.06 & 6.12 & 2.23 & 78.11 &  54.18 \\
+        {\tt custom\_lowres} & $0.5<r<5$ & 131.84 & 8.32 & 2.55 & 76.23 &  82.46 \\
+        {\tt default} & $0.5<r<5$ & 1.38 & 15.79 & 464.08 & 848.24 &  756.28 \\ 
+        {\tt default\_lowres} & $0.5<r<5$ & 0.73 & 15.38 & 849.23 & 1156.57 &  435.75 \\
+
 \end{tabular}}
     \caption{Values comparing possible measures of scale height for the different runs.}
     \label{tab:schaye_test}

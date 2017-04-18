@@ -20,7 +20,17 @@ res_lr = survis.helper.get_res(res_elem_lr, bbox_x, bbox_y)
 res_nr = survis.helper.get_res(res_elem_nr, bbox_x, bbox_y)
 
 names = ['custom', 'custom_highres', 'custom_lowres', 'default', 'default_lowres']
+
+G = 4.302e-3
 # ----------------------
+
+def disp(sg, fg=0.1):
+    """ The dispersion from the Martizzi model in km/s """
+    pfm = 300000
+    f = 0.4
+    F = 0.5
+
+    return 1.8 * (f/F)**(3/5) * G**(2/5) * pfm**(1/5) * fg**(-2/5) * sg**(1/5)
 
 
 class Vertical(object):
@@ -116,6 +126,14 @@ class Vertical(object):
         return local
 
 
+    def expected_lj_mart(self, sg, rhog):
+        disp_val = disp(sg)
+
+        lj =  disp_val * np.sqrt(9/(8*G)) / np.sqrt(rhog)
+
+        return lj
+
+
     def local_surface_density(self):
         n = len(self.z_data)
 
@@ -124,7 +142,7 @@ class Vertical(object):
         return n * self.gas_mass_res / area
 
 
-    def print_data(self):
+    def print_data(self, latex=False, name=None):
         """ Prints the data for making the table """
         factor_3d_dens = 4.04367e-8
 
@@ -132,13 +150,24 @@ class Vertical(object):
         sg = self.local_surface_density()
 
         expected_lj = (sg/(rho_g))*1e9  # in pc
+        proj_lj = self.expected_lj_mart(sg, rho_g/1e9)
 
+        if not latex:
+            print("rho: {} nh/cm3, sg: {} ms/pc2, sg/rho: {} pc, Z: {} pc, lj: {} pc".format(
+                rho_g * factor_3d_dens,
+                sg,
+                expected_lj,
+                abs(self.popt[1]) * 1e3,
+                proj_lj))
+        else:
+            print("{} & {:3.2f} & {:3.2f} & {:3.2f} & {:3.2f} &  {:3.2f}".format(
+                name,
+                rho_g * factor_3d_dens,
+                sg,
+                expected_lj,
+                proj_lj,
+                abs(self.popt[1])*1e3))
 
-        print("rho: {} nh/cm3, sg: {} ms/pc2, sg/rho: {} pc, Z: {} pc".format(
-            rho_g * factor_3d_dens,
-            sg,
-            expected_lj,
-            abs(self.popt[1]) * 1e3))
 
         return
 
@@ -147,35 +176,45 @@ class Vertical(object):
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
     from matplotlib.ticker import MaxNLocator
+    import sys
     # Run in scripting mode, and actually perform the analysis
     output = {}
     output_excl = {}  # Has the particles that are more than 0.5kpc out of the center.
 
+    latex = "--latex" in sys.argv
+
+
     for simulation in names:
         filename = "{}/snapshot_{:03d}.hdf5".format(simulation, snapshot)
-        tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
+        if not latex:
+            tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
 
         if "lowres" in simulation:
-            data = Vertical(filename, res_lr, bbox_x, bbox_y, sf=10)
+            data = Vertical(filename, res_lr, bbox_x, bbox_y, sf=10, inner=0, outer=0.5)
         else:
-            data = Vertical(filename, res_nr, bbox_x, bbox_y)
+            data = Vertical(filename, res_nr, bbox_x, bbox_y, inner=0, outer=0.5)
 
-        data.print_data()
+        name = r"{{\tt {}}} & $r<0.5$".format(simulation)
+        data.print_data(latex, name)
     
         output[simulation] = data
 
+    
+    if not latex:
+        print("Excluding outer!")
 
-    print("Excluding outer!")
     for simulation in names:
         filename = "{}/snapshot_{:03d}.hdf5".format(simulation, snapshot)
-        tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
+        if not latex:
+            tqdm.write("Attempting to analyse {} {}".format(simulation, snapshot))
 
         if "lowres" in simulation:
             data = Vertical(filename, res_lr, bbox_x, bbox_y, sf=10, inner=0.5, outer=5)
         else:
             data = Vertical(filename, res_nr, bbox_x, bbox_y, inner=0.5, outer=5)
 
-        data.print_data()
+        name = r"{{\tt {}}} & $0.5<r<5$".format(simulation)
+        data.print_data(latex, name)
     
         output_excl[simulation] = data
 
