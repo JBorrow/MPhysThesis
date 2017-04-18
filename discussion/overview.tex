@@ -4,7 +4,9 @@ The model has some clear successes, being physically motivated and calibrated fr
 The galaxies produced by the N-body simulations show that there is too little pressure support to produce disks that have a physically accurate scale height and density profile.
 To create a stable disk, the galaxies must transport over 80\% of their mass into the centre, which is clearly not reproduced in real-life galaxies.
 This, however, could just be a simulation artefact and not an effect from the model as with a star formation prescription a large amount of this mass would be converted to stars due to the high local density in these regions (and hence short gas consumption timescale).
-This situation presents a new issue, though, in that if star formation is programmed in to the model then there would be very little gas left in the galaxy (with $\fgas \rightarrow 0$ over one gas consumption timescale in the central regions). <WORK OUT THE GAS CONSUMPTION TIMESCALE IN THE CENTER AND PUT THAT IN HERE SOMEWHERE>.
+This situation presents a new issue, though, in that if star formation is programmed in to the model then there would be very little gas left in the galaxy (with $\fgas \rightarrow 0$ over one gas consumption timescale in the central regions).
+In the central region (inner 500 pc) of the {\tt custom} run after 2 Gyr of evolution, the star formation timescale drops to only 1 Myr.
+This low timescale (calculated using Equation \ref{eqn:gc}) is due to the unphysical high densities in the central region.
 
 One success is that the model manages to produce a transient spiral structure from an isotropic initial condition.
 This model also shows how mass manages to make its way to the centre of a galaxy continually, with the stable surface density far out in the disk being very low.
