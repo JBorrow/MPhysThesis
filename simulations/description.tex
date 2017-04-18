@@ -44,13 +44,14 @@ with $Z_x$ the scale height for component $x$. The results are shown in Figure \
 The differences between the two regimes can be understood through a simple \citet{jeans_stability_1902} analysis; the central regions have a considerably higher density and hence smaller Jeans length.
 This, according to \citet{schaye_model-independent_2001}, implies that the scale height should be considerably smaller.
 It is possible to use the simulations as a test of the aforementioned work, by calculating the local 3D density ($\rho_g$), surface density ($\sg$), and Jeans' length ($L_J$).
-These values are presented in Table \ref{tab:schaye_test}.
+These values are presented in Table \ref{tab:schaye_test} and show that whilst the Jeans' length and actual scale height are roughly of order each other in low density regions, in the high density regions this approximation quickly becomes invalid.
+This appears to be resolution-independent, however the {\tt custom\_highres} model shows a considerably higher density central region due to the reduced softening length.
 
 \begin{table}
     \centering
     \resizebox{\textwidth}{!}{
     \begin{tabular}{l|c|c|c|c|c|c}
-        Run & Range [kpc] & $\rho_g$ [n$_H$ cm$^{-3}$] & $\sg$ [$\msun \pc^{-2}$] & $\sg/\rho_g$ [pc] & $L_J$ [pc] & $Z_g$ [pc] \\
+        Run & Range [kpc] & $\rho_g$ [n$_H$ cm$^{-3}$] & $\sg$ [$\mathrm{M}_\odot \pc^{-2}$] & $\sg/\rho_g$ [pc] & $L_J$ [pc] & $Z_g$ [pc] \\
         \hline
 
         {\tt custom} & $r<0.5$ & 7.06$\times10^3$ & 3.4$\times10^3$ & 19.5 & 34.7 &  26.3 \\
@@ -66,7 +67,7 @@ These values are presented in Table \ref{tab:schaye_test}.
 
 
 \end{tabular}}
-    \caption{Values comparing possible measures of scale height for the different runs.}
+\caption{Values comparing possible measures of scale height for the different runs, with $r$ corresponding to galactocentric radius. The local densities ($\rho_g$) are calculated by taking the mean density computed by GADGET-2 over all of the contained particles.}
     \label{tab:schaye_test}
 \end{table}
 
