@@ -160,7 +160,7 @@ class Vertical(object):
                 abs(self.popt[1]) * 1e3,
                 proj_lj))
         else:
-            print("{} & {:3.2f} & {:3.2f} & {:3.2f} & {:3.2f} &  {:3.2f}".format(
+            print("{} & {:.3g} & {:.3g} & {:.3g} & {:.3g} &  {:.3g} \\\\".format(
                 name,
                 rho_g * factor_3d_dens,
                 sg,
