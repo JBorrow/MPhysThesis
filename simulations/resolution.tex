@@ -2,9 +2,10 @@ At first glance, the simulations appear to be approximately resolution-independe
 
 Of particular interest is the scale height of the disk between the {\tt custom\_lowres}, {\tt custom}, and {\tt custom\_highres} runs.
 These are calculated by fitting an exponential profile,
-$$
+\begin{equation}
     \rho_x(z) \propto \mathrm{sech}^2\left(z/Z_x\right)
-$$
+    \label{eqn:vertprofile}
+\end{equation}
 with $Z_x$ the scale height for component $x$. The results are shown in Figure \ref{fig:vheighthist}.
 
 The differences between the two regimes can be understood through a simple \citet{jeans_stability_1902} analysis; the central regions have a considerably higher density and hence smaller Jeans length.
