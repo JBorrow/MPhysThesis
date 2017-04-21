@@ -1,5 +1,5 @@
-The evolution of the Toomre $Q$ parameter in the simulated galaxies is one of the most promising outputs of this model.
-The following section considers the evolution and final state of the galaxy runs presented in \S \ref{app:sims}.
+The evolution of the Toomre $Q$ parameter in the simulated galaxies is one of the most promising results for the supernovae-driven model.
+The following section considers the evolution and final state of the galaxy runs presented in \S \ref{sec:sims}.
 
 \subsection{Comparison of models}
 
@@ -7,7 +7,7 @@ The following section considers the evolution and final state of the galaxy runs
     \savebox{\graphicsbox}{\includegraphics[trim={1.95cm 1.9cm 1.9cm 1.9cm}]{toomre_q_simulation.pdf}}% Store image
     \leavevmode\rlap{\usebox{\graphicsbox}}% Set image with complete overlap
     \begin{minipage}[b]{0.63\wd\graphicsbox}% Insert caption
-        \caption{The Toomre $Q$ of of all of the runs from Table \ref{tab:sims} is shown after $\approx 2$ Gyr of evolution, with the colour encoding $Q_{gas}$ being capped at $Q=2$ to ensure clarity. The {\tt custom} model shows clear spiral structure and is marginally stable in accordance with the work of \citet{hopkins_stellar_2012}.}
+        \caption{The Toomre $Q$ of of all of the runs from Table \ref{tab:sims} is shown after $\approx 2$ Gyr of evolution, with the colour encoding $Q_{gas}$ being capped at $Q=2$ to ensure clarity. The {\tt custom} model shows clear spiral structure and is marginally stable in accordance with the work of \citet{hopkins_stellar_2012} and leads to a final $Q \approx 0.7$ \citep{behrendt_structure_2015}.}
         \label{fig:toomqsimbigfig}
     \end{minipage}\hspace*{0.33\wd\graphicsbox}% Add space to represent figure width
 \end{figure}
@@ -16,12 +16,12 @@ A map of the Toomre $Q$ parameter for each of the simulations is presented in Fi
 The maps appear to have little dependence on resolution; the $Q(r)$ and hence stability of the disks is similar for the varying run resolutions.
 
 The {\tt custom\_gasonly} simulation forms giant clumps quickly ($<0.01$ Gyr) with the vat majority of the particles being transported to the centre within $\approx 2$ Gyr of evolution.
-This occurs because higher gas fractions correspond to lower stable gas masses (the stable disk mass is proportional to $\sqrt{\fgas}$) and as there is no mechanism to eject mass from the disk it is transported to the centre (see \S \ref{sec:sdevo} for more detail on this process).
+This occurs because higher gas fractions correspond to lower stable gas masses (the dispersion and hence stable disk mass goes like $\fgas^{-25}$) and as there is no mechanism to eject mass from the disk it is transported to the centre (see \S \ref{sec:anal_sdevo} for more detail on this process).
 
-The {\tt default\_gasonly} run remains in a low-$Q$ sate as there is too much pressure support for clumps to form and be transported to the centre; this leaves it in a quasi-stable state for the whole evolution with a gradual mass flow into the centre.
+The {\tt default\_gasonly} run remains in a low-$Q$ sate as there is too much pressure support for clumps to form and be transported to the centre; this leaves it in a quasi-stable state for the whole evolution with gradual mass flow into the centre.
 This also occurs for the other {\tt default} runs, however the disparity from $Q \approx 1$ is much less pronounced due to the lower gas fraction.
 
-\subsubsection{Evolution}
+\subsection{Evolution}
 
 \begin{figure}[!ht]
     \includegraphics[trim={1.95cm 0cm 1.9cm 1.33cm}]{Q_evo_simulation.pdf}
@@ -32,24 +32,25 @@ This also occurs for the other {\tt default} runs, however the disparity from $Q
 In this section the focus will be mainly on the {\tt custom} and its evolution presented in Figure \ref{fig:toomqsimsmallfig} unless otherwise stated.
 
 It is the uniformity of the $Q$ value, rather than the absolute value, that is the important metric in disk stability as this ensures that the balance of pressure support to shear force is consistent over the disk, with the simulations using the {\tt custom} model finalising at $Q \approx 0.7$.
-Nevertheless, the $Q\approx 0.7$ value produced by these simulations is promising, with the theoretical work of \citet{behrendt_structure_2015} suggesting that for a thick disk including interactions with a stellar component a value of $Q_c = 0.696$ gives stability for a $\mathrm{sech}^2$ vertical density profile.
-Similar results have been proposed by \citet{kim_three-dimensional_2002, wang_equilibrium_2010} for $Q \approx 0.7$ for various vertical density distributions.
+Nevertheless, the $Q\approx 0.7$ value produced by these simulations is promising, with the theoretical work of \citet{behrendt_structure_2015} suggesting that for a thick disk including interactions with a stellar component a value of $Q_c = 0.696$ ensures stability for a $\mathrm{sech}^2$ vertical density profile.
+Similar results have been reported by \citet{kim_three-dimensional_2002, wang_equilibrium_2010} giving $Q \approx 0.7$ for various vertical density distributions.
 
 The ring formation and clumping that is seen in the initial stages of the simulation (second panel, Figure \ref{fig:toomqsimsmallfig}) aids the transfer of mass to the central regions of the galaxy, stabilising it and reproducing the density profile predicted in \S\ref{sec:sigrpred} (Figure \ref{fig:toomreqthr_dat}).
-This clumping is characteristic of an unstable density profile and is seen often in simulations of high-redshift galaxies (\citet{bournaud_bulge_2016} and associated references).
-It is unsurprising, that this pattern is reproduced here due to the highly unstable initial conditions; future work should focus on generating initial conditions that fit the profile suggested in \S \ref{sec:sigr_pred} and the evolution that results.
+This clumping is characteristic of an unstable density profile and is often seen in simulations of high-redshift galaxies (\citet{bournaud_bulge_2016} and associated references).
+It is unsurprising that this pattern is reproduced here due to the highly unstable initial conditions; future work should focus on generating initial conditions that fit the profile suggested in \S \ref{sec:sigrpred} and the evolution that results.
 
 Perhaps, though, this evolution reveals something deeper about this model.
 It is unlikely that this model will be able to produce both a stable galaxy and one that fits the exponential density profile seen in nature without further addition of pressure sources from star formation.
-The prescription used here is extraordinarily simple with only one component of pressure (the turbulence injected from supernovae) being considered, and this both removes the possibility of adding stochastic supernovae in the simulation as well as neglecting key pressure sources and gas phases present in star formation.
+The prescription used here is extraordinarily simple with only one component of pressure (the turbulence injected from supernovae) being considered, and this both removes the possibility of adding stochastic supernovae to the simulation as well as neglecting key pressure sources and gas phases that are central in stellar feedback.
 The radiation field from the stellar component is a notable omission and would help clear the overdensity in the central region of the simulated galaxies.
-This, however, would require the addition of a computationally expensive radiative transfer code or further small-scale calibration simulations.
+This, however, would require the addition of a computationally expensive radiative transfer code, which would negate the purpose of this computationally efficient, zoom-out approach.
+It would be possible, though, to run further small-scale calibration simulations to calibrate a model based on the radiation field.
 
 
 \begin{figure}
     \centering
     \includegraphics{toomre_q_data.pdf}
-    \caption{The evolution of the surface density of the disks as a function time, with the theoretical predictions shown as a colour map in the background. Note that the {\tt custom} run is shown on the left and the {\tt default} shown on the right. The {\tt custom} colour map in the background has been changed to use that $\Sigma_Q = \sst + \sg$ rather than the more complex form shown in \S \ref{sec:sigrpred}, this is because the low pressure support in the gaseous disk allows it to couple strongly to the considerably more massive stellar component. This coupling prevents the hydrodynamic forces from having their maximal effect, and leads to $\sigma_*/\sigma_g \approx 1$ for the relevant velocity dispersions of the particles. This leads to a lower predicted surface density for the outer regions as the lower support makes them more susceptible to gravitational instability. The low-density regions have almost no pressure support (and it is likely that they will be in the isothermal regime) meaning that their hydrodynamical effects are negligible. Note how the curves tend to relax towards the $Q\approx1$ line, even in the case of the {\tt default} model where the variations in local $Q$ are significantly smaller than in the {\tt custom} model. It is also worth noting that these are lower bounds on the surface density in these regions; it is calculated by considering the number of particles within a shell and is completely unsmoothed.}
+    \caption{The evolution of the surface density of the disks as a function time, with the theoretical predictions shown as a colour map in the background. The {\tt custom} run is shown on the left and the {\tt default} shown on the right. The {\tt custom} colour map in the background has been changed to use that $\Sigma_Q = \sst + \sg$ rather than the more complex form shown in \S \ref{sec:sigrpred}, because the low pressure support in the gaseous disk allows it to couple strongly to the considerably more massive stellar component. This coupling prevents the hydrodynamic forces from having their maximal effect, and leads to $\sigma_*/\sigma_g \approx 1$ for the relevant velocity dispersions of the particles. The coupling leads to a lower predicted surface density for the outer regions as the lower support makes them more susceptible to gravitational instability. The low-density regions have almost no pressure support (these regions are in the isothermal regime) meaning that their hydrodynamical effects are negligible. Note how the curves tend to relax the marginally Toomre-stable sectors, even in the case of the {\tt default} model where the variations in local $Q$ are significantly smaller than in the {\tt custom} model. It is also worth noting that these are lower bounds on the surface density in these regions; it is calculated by considering the number of particles within a shell and is completely unsmoothed.}
     \label{fig:toomreqthr_dat}
 \end{figure}
 

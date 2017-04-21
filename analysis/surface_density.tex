@@ -1,19 +1,23 @@
 \begin{figure}[!ht]
-    \includegraphics[trim={1.95cm 0cm 1.9cm 0.7cm}]{sd_evo_simulation.pdf}
-    \caption{The evolution of the surface density in the {\tt custom} run is shown. Colour encodes $\log\sg$, and is cut off below $0.1 \msun \pc^{-2}$ and above $10^3 \msun \pc^{-2}$ for clarity. Initially the disk violently forms clumps due to the extremely low Toomre $Q$ value. As these clumps are transported to the centre of the galaxy, they are sheared and form a transient spiral structure, whilst enriching the central region of the galaxy with a high volume of gas. In Figure \ref{fig:sd_r_evo} this mass transport is shown in a more quantitative manner. The {\tt custom} run is the only run shown in the interests of space, as all of the {\tt default} runs evolve uniformly and the other {\tt custom} runs in a similar fashion.}
-    \label{fig:sd_evo_small}
+    \centering
+    \includegraphics{sd_r_fig.pdf}
+    \caption{The evolution of the (gaseous) mass contained within various shells (see legend) is shown. On the left, the {\tt custom} run is show, with the {\tt default} run being shown on the right. It is clear from this figure that the supernova-driven model causes a large proportion of the gas to be transported into the centre of the galaxy; over 80\% of the gas particles falling into this central region within 1 Gyr of the evolution of the disk. This is unsurprising as the disk was initiall highly Toomre-unstable (see the discussion in \S \ref{sec:sigrpred} due to the low pressure support that the {\tt custom} model provides.}
+    \label{fig:sd_r_evo}
 \end{figure}
-Due to the initial conditions not fitting the system exactly, there will initially be a significant movement of particles within the disk until it is made marginally Toomre-stable ($Q\approx1$).
+Because the initial conditions do not fit the system exactly, there will initially be a significant movement of particles within the disk until it is made marginally Toomre-stable ($Q\approx1$).
 For the two models this is shown in Figure \ref{fig:sd_r_evo}.
 Due to the fact that the {\tt default} model is more stable at higher surface densities (see Figure \ref{fig:toomreqthr_dat}), there is considerably less mass transport into the center of the galaxy than with the {\tt custom} model.
+The {\tt default} model is also unable to form clumps due to its high pressure support.
+This prevents the {\tt default} galaxies from rapidly transporting their mass into the central regions to stabalise the galaxy; it is really the clump formation that drives this process. 
 
-This highlights three main problems with the simulations in this work, namely that
+The rapid movement of mass into the central regions highlights three main problems with the simple supernovae-driven model, namely that
 \begin{itemize}
     \item The disk is unable to eject mass. Under normal circumstances, supernovae explosions would eject mass vertically back into the IGM.
     \item There is no infall from the IGM at large radii in the galaxy to feed the outer shells.
     \item The stars are only tracers, rather than actually being formed in the simulation, and as such gas cannot be consumed and the gas fraction cannot be lowered.
 \end{itemize}
-In the {\tt custom} model in partuclar, this leads to a build-up of mass in the center of the galaxy which is unphysical; the build-up however can not be separated from the effects of the model without considerable further work.
+In the {\tt custom} model in partuclar, this leads to a build-up of mass in the center of the galaxy which is not seen in nature.
+This build-up, which is due to a lack of star-formation prescription, can not be separated from the effects of the model without considerable further work.
 The predictions in \S \ref{sec:sigrpred} suggest that whilst there should be a build-up of mass in the center, it should not be at the $\approx 80\%$ levels that are seen in the {\tt custom} runs.
 Those predictions are shown against the simulation data in Figure \ref{fig:toomreqthr_dat}.
 
@@ -22,13 +26,12 @@ This work would dispute that; whilst there is mass transport into the center of 
 The gas is transported into the center such that the galaxy can fit the $Q\approx1$ $\sg(r)$ curve which is considerably different from the initial conditions of an exponential disk.
 This curve, as shown in \S \ref{sec:sigrpred}, depends on the underlying dark matter structure of the galaxy and the sound speed of the gas.
 
-It could be suggested that for an equation of state to be considered valid, it must be able to reproduce the roughly exponential surface density curves that are seen in nature.
-Under such a situation, the processes that provide extra pressure to the gas (cosmic rays, magnetic fields, star formation), would allow the galaxy to be marginally stable and yet still reproduce an exponential surface density profile.
+For an equation of state to be considered valid, it must be able to reproduce the roughly exponential surface density curves that are seen in nature for a typical dark matter profile.
+To design such an equation of sthate, the processes that provide extra pressure to the gas (cosmic rays, magnetic fields, star formation), would allow the galaxy to be marginally stable and yet still reproduce an exponential surface density profile.
 
 \begin{figure}[!ht]
-    \centering
-    \includegraphics{sd_r_fig.pdf}
-    \caption{The evolution of the (gaseous) mass contained within various shells (see legend) is shown. On the left, the {\tt custom} run is show, with the {\tt default} run being shown on the right. It is clear from this figure that the {\tt custom} model causes a large proportion of the gas to be transported into the centre of the galaxy; over 80\% of the gas particles falling into this central region within 1 Gyr of the simulation beginning. This is unsurprising as the Toomre $Q$ parameter for the disk in the initial conditions was extremely low (see the discussion in \S \ref{sec:sigrpred} due to the low pressure support that the {\tt custom} model provides.}
-    \label{fig:sd_r_evo}
+    \includegraphics[trim={1.95cm 0cm 1.9cm 1.9cm}]{sd_evo_simulation.pdf}
+    \caption{The evolution of the surface density in the {\tt custom} run is shown. Colour encodes $\log\sg$, and is cut off below $0.1 \msun \pc^{-2}$ and above $10^3 \msun \pc^{-2}$ for clarity. Initially the disk violently forms clumps due to the extremely low Toomre $Q$ value. As these clumps are transported to the centre of the galaxy, they are sheared and form a transient spiral structure, whilst enriching the central region of the galaxy with a high volume of gas. In Figure \ref{fig:sd_r_evo} this mass transport is shown in a more quantitative manner. The {\tt custom} run is the only run shown in the interests of space, as all of the {\tt default} runs evolve uniformly and the other {\tt custom} runs in a similar fashion.}
+    \label{fig:sd_evo_small}
 \end{figure}
 
