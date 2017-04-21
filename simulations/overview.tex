@@ -1,10 +1,10 @@
-There are several methods available to test an equation of state; however one particularly robust method is through the use of N-body simulations.
-The equation of state (Equation \ref{eqn:eos}) found in this work is tested using the Gadget-2 SPH code \citep{springel_cosmological_2005}.
-Details of the implementation, as well as the initial conditions generation, are available in Appendices \ref{app:isg} and \ref{app:ics} respectively.
+The equation of state (Equation \ref{eqn:eos}) found in this work is implemented in the Gadget-2 SPH code \citep{springel_cosmological_2005} such that N-body simulations of galaxies can be used to test its applicability to a cosmological-scale simulation.
+Details of the implementation, as well as the custom initial conditions generator, are available in Appendices \ref{app:isg} and \ref{app:ics} respectively.
 
-It is clear that the most robust method to test any change in gas properties is to run a full N-body simulation of a cosmological volume, in a similar fashion to \citet{schaye_eagle_2015, vogelsberger_introducing_2014}.
-These simulations, however, are incredibly computationally expensive, and so in this work isolated galaxy disks are used rather than a cosmological volume, as the analysis presented in \S \ref{sec:eos} has a clear focus on galaxy disks as a basis for the model.
-Using disk galaxies also make it possible to test the theory of \citet{schaye_model-independent_2001} that $\sg = \rho_g L_J$, and hence provide a test for the robustness of the method used to generate the equation of state.
+It is clear that the most robust method to test any change in gas properties is to run a full N-body simulation of a cosmological volume, in a similar fashion to \citet{vogelsberger_introducing_2014, schaye_eagle_2015}.
+These simulations, however, are incredibly computationally expensive and whilst a single galaxy simulation will be unable to predict the resultant galaxy population from a cosmological simulation, it will be able to predict the resultant density profile and stability of a galaxy disk.
+It it is not possible to form a stable galaxy disk in an isolated case, then it is unlikely that a full cosmological simulation is worthwhile.
 
-The simulations utilise a fixed NFW profile \citep{coe_dark_2010, navarro_structure_1996} to prevent spurious fluctuations caused by high-mass dark matter particles, as well as provide a more efficient computation of the problem.
+Using disk galaxies also make it possible to test the theory of \citet{schaye_model-independent_2001} that $\sg = \rho_g L_J$, and hence provide a test for the methodology used to generate the equation of state.
 
+The simulations utilise a fixed NFW profile \citep{navarro_structure_1996, coe_dark_2010} to prevent spurious fluctuations caused by high-mass dark matter particles, as well as provide a mode computationally efficient dark matter profile.
