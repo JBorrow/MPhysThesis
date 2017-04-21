@@ -4,15 +4,10 @@ Here, an equation of state is used to describe the pressure of the interstellar 
 \label{eqn:polytrope}
 p \propto \rho_g ^ {\gamma_{eff}}~,
 \end{equation}
-where $p$ is the pressure, $\rho_g$ the density of gas and $\gamma_{eff}$ will be referred to the index of the effective equation of state.
+where $p$ is the pressure, $\rho_g$ the density of gas and $\gamma_{eff}$ the polytropic index of the effective equation of state.
 
-The equation of state $p \propto \rho^{4/3}$ was chosen in the EAGLE simulations \citep{schaye_eagle_2015} due to the useful property that this value of $\gamma_{eff} = 4/3$ ensures the jeans mass is independent of density.
-This choice ensures that the jeans mass is always resolved and ensures that spurious clumping (a simulation artefact) does not occur, however it is not directly physically motivated.
-It turns out that this equation of state is also enough to produce stable galaxies when normalized to $T = 8\times 10^3$ K at $n_H = 10^{-1}$ cm$^{-3}$ on the resolution scales considered in EAGLE (approximately 700 pc).
-It would be useful to produce an equation of state that has simular features to this but also has a solid physical underpinning.
+The equation of state $p \propto \rho^{4/3}$ was chosen in the EAGLE simulations \citep{schaye_eagle_2015} as a value of $\gamma_{eff} = 4/3$ ensures the jeans mass is independent of density.
+This choice ensures that the jeans mass is always resolved and prevents spurious clumping (a simulation artefact), but is not physically motivated directly by any actual gas properties.
+This equation of state is also enough to produce stable galaxies when normalized to $T = 8\times 10^3$ K at $n_H = 10^{-1}$ cm$^{-3}$ on the resolution scales considered in EAGLE (approximately 700 pc), when used with the extra physics in the EAGLE code.
+It would be useful to produce an equation of state that has similar features to this but also has a solid physical underpinning.
 
-Work over the past three decades has shown that a fruitful avenue of approach is to consider the situation in which the weight of a galaxy disk is supported by the pressure from star formation processes such as the turbulent pressure injected by supernoave. 
-This model requires calibration; in particular the interaction of two supernoavae is an important consideration and is not well studied observationally.
-To solve this problem, small-scale simulations with a resolution of around 1 pc \citep{martizzi_supernova_2015} are used.
-These models include far more Physics than is resolvable in a cosmological-scale simulation and so are used to extract macroscopic parameters such as the efficiency of supernovae and their turbulence injection as well as their dependence on local properties like the gas fraction $f_gas = \sg/\Sigma$.
-In this work, the simulations of \citet{martizzi_supernova_2015} are used, and in particular the calibration of the turbulence injected by supernovae as a function of surface gas density \citep{martizzi_supernova_2016}.
