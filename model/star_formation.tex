@@ -1,7 +1,7 @@
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{bigiel_fig.pdf}
-    \caption{The star formation law from Equation \ref{eqn:martsfr} plotted against the data from \citet{bigiel_star_2008}. The dashed lines are contours of constant $\fgas$, i.e. more mass is added to the disk to increase $\sst$, whereas the solid lines have constant $\Sigma = \sst + \sg$, i.e. the disk trades out stellar mass for gas mass to increase the star formation rate. The constant $\fgas$ lines stop when the region reaches $\fgas=1$. Note that all lines on this plot take $F=1$ for simplicity and consistency; the true lines may vary somewhat from the ones plotted here (see \S \ref{sec:calibF} for more information), however it is clear that the model presented here reproduces some trends in the data. In particular, note the M51 data which is extremely well fit by a $\Sigma \approx 100 \msun \pc^{-2}$ constant surface density fit. Note the cutoff in star formation at around $\sg \approx 10 \msun \pc^{-2}$. \citet{schaye_star_2004} argues that this is due to the UV background radiation in the galaxy preventing the gas from coalescing to form stars; this will be used in \S \ref{sec:calibF} to calibrate the supernovae efficiency $F$.}
+    \includegraphics[trim=1cm 0 1cm 1cm, width=\textwidth]{bigiel_fig.pdf}
+    \caption{The star formation law from Equation \ref{eqn:martsfr} plotted on top of the data from \citet{bigiel_star_2008}. The dashed lines are contours of constant $\fgas$, i.e. more mass is added to the disk to increase $\sg$, whereas the solid lines have constant $\Sigma = \sst + \sg$, i.e. the disk trades out stellar mass for gas mass to increase the star formation rate. The constant $\fgas$ lines stop when the region reaches $\fgas=1$. Note that all lines on this plot take $F=1$ for simplicity and consistency; the true lines may vary from the ones plotted here (see \S \ref{sec:calibF} for more information), however it is clear that this model reproduces some trends in the data. In particular, the M51 data is extremely well fit by a $\Sigma \approx 100 \msun \pc^{-2}$ constant surface density fit. Note the cutoff in star formation at around $\sg \approx 10 \msun \pc^{-2}$. \citet{schaye_star_2004} argues that this is due to the UV background radiation in the galaxy preventing the gas from coalescing to form stars; this will be used in \S \ref{sec:calibF} to calibrate the supernovae efficiency $F$.}
     \label{fig:bigielwithmart}
 \end{figure}
 
@@ -17,14 +17,14 @@ The pressure generated from supernoave in the disk can be written (from dimensio
 \label{eqn:turb}
 p_T = F \sfr \pfm,
 \end{equation}
-where $F$ is a factor of order unity that accounts for cancellation of momentum from interactions within the disk, $P_{fin}$ is the average momentum injected per supernovae, and $m_*$ is the average mass of gas consumed per supernova candidate (here $m_* = 100 \msun$).
+where $F$ is a factor of order unity that accounts for cancellation of momentum from interactions within the disk and the overall efficiency of the winds that the supernova drives, $P_{fin}$ is the average momentum injected per supernovae, and $m_*$ is the average mass of gas consumed per supernova candidate (here $m_* = 100 \msun$).
 
-These two expressions are equal in equlibrium and as such a star formation law
+These two expressions are equal when the disk is in equlibrium giving a star formation law
 \begin{equation}
 \label{eqn:martsfr}
-\sfr = \frac{\pi G}{F \pfm} \sg \Sigma~,
+\sfr = \frac{\pi G}{F \pfm} \sg \Sigma~.
 \end{equation}
-which is plotted against the data from \citet{bigiel_star_2008} in Figure \ref{fig:bigielwithmart} for various values of total surface density and gas fraction $f_{gas} = \sg/\Sigma$.
-Similar results for the star formation law are found by \citet{ostriker_maximally_2011, faucher-giguere_feedback-regulated_2013, martizzi_supernova_2016}, and many more works throughout the literature.
+This law is plotted against the data from \citet{bigiel_star_2008} in Figure \ref{fig:bigielwithmart} for various values of total surface density and gas fraction $f_{gas} = \sg/\Sigma$.
+Similar results for the star formation law are found by \citet{ostriker_maximally_2011, faucher-giguere_feedback-regulated_2013, martizzi_supernova_2016}, and many more throughout the literature.
 The $F$ paramter can be calibrated by considering the star formation cutoff in the $\sfr$, $\sg$ plane that is seen in \citet{bigiel_star_2008}, and the theoreitcal work of \citet{schaye_star_2004} (see \S \ref{sec:calibF} for more details).
 The $P_{fin}/m_*$ parameter is calculated by using small-scale simulations.

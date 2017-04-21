@@ -1,22 +1,21 @@
-\begin{figure}
+\begin{figure}[ht]
     \centering
     \includegraphics{toomre_q_theory.pdf}
-    \caption{Predicted $\sg(r)$ for two models; on the left the equation of state found above and on the right the default equation of state in GADGET-2 (assuming a fixed gas temperature of $10^4$ K). The grey line shows the predicted curve for $Q=1$. Assuming that the disks self-stabilise at $Q\approx1$, the surface density of stable galaxy in which the disk is supported by turbulence from supernovae should have a considerably lower surface density than one in which the gas behaves adiabatically.}
+    \caption{Predicted $\sg(r)$ for two models; on the left the equation of state found above and on the right the default equation of state in GADGET-2 (assuming a fixed gas temperature of $10^4$ K). The grey line shows the predicted curve for $Q=1$. Assuming that the disks self-stabilise at $Q\approx1$, the surface density of stable galaxy in which the disk is supported by turbulence from supernovae should have a considerably lower surface density than one in which the gas behaves adiabatically. For more details on the underlying dark matter profile, see \S \ref{sec:sims}}
     \label{fig:toomreqthr}
 \end{figure}
 
 The \citet{toomre_gravitational_1964} parameter, $Q_{gas}$ for the gas in the galaxy, is a measure of the stability of the disk.
-For a value of $Q<1$, the disk is unstable, with the shear forces being applied due to the differential rotation in the disk overcoming internal pressure forces of the gas.
+For a think disk with a negigeable vertical profile, a value of $Q<1$, the disk is unstable, with the shear forces being applied due to the differential rotation in the disk overcoming internal pressure forces of the gas.
 For a value of $Q>1$, the disk is overstable, with the pressure forces being more than enough to offset the differential rotation.
 Whether real galaxy disks should be stable or not during their evolution is still a topic of debate in the community, however \citet{hopkins_stellar_2012} finds that real galaxy disks are \emph{marginally stable}, with a value of $Q \approx 1$.
-Also, it is expected that Milky-Way type galaxies are stable over long timescales ($>$ Gyr) and as such here a value of $Q \approx 1$ is chosen as values of $Q >> 1$ lead to high levels of vertical instability in galaxy disks.
 
 The \citet{toomre_gravitational_1964} parameter is given as
 \begin{equation}
     Q_{gas} = \frac{c_s \kappa}{\pi G \Sigma_Q}~,
     \label{eqn:Q}
 \end{equation}
-with $c_s$ the sound speed, $\kappa$ the epicyclic rotation frequency (taken to be $\sqrt{2} v/R$ in accordance with \citet{livermore_resolved_2015}) and $\Sigma_Q$ a combination of the gaseous and stellar surface densities of the disk.
+with $c_s$ the sound speed, $\kappa$ the epicyclic rotation frequency (taken to be $\sqrt{2} v/R$ in accordance with \citet{livermore_resolved_2015} with $v$ the particle velocity and $R$ its galactocentric radius) and $\Sigma_Q$ a combination of the gaseous and stellar surface densities of the disk.
 It is important to note that the stellar and gaseous components of the disk contribute differently to the disks stability \citep{rafikov_local_2001}, and so here
 \begin{equation}
     \Sigma_Q = \sg  + \left(\frac{2}{1 + f_\sigma^2}\right)\sst~,
@@ -24,12 +23,13 @@ It is important to note that the stellar and gaseous components of the disk cont
 \end{equation}
 with $f_\sigma = \sigma_*/\sigma_g \approx 2$ for real galaxies \citep{korchagin_local_2003}
 
-It is possible to predict the form of $\Sigma(r)$ expected as a function of galactocentric radius in the above model, by using the underlying NFW profile to give $\kappa$, and the equation of state to give $c_s$ for a given $Q_{gas}$.
+It is possible to predict the form of $\Sigma(r)$ expected as a function of galactocentric radius in the above model, by using the underlying dark matter profile to give $\kappa$, and the equation of state to give $c_s$ for a given $Q_{gas}$.
+This is shown for the NFW profile used in the N-body simulations in Figure \ref{fig:toomreqthr}.
 
 \subsubsection{Stable masses}
 
-Because the profiles shown in Figure \ref{fig:toomreqthr} do not depend on the mass of the disk, it is possible to find a stable gas mass of the disk.
-This is somewhat difficult, though, as the NFW profile used to determine the circular velocities is non-normalizable, and as such the integration bounds that are chosen here are [0, 30] kpc.
+Given a dark matter halo profile, it is possible to find a stable gas mass of the disk by integrating over the surface density.
+For the NFW profile, integration bounds must be chosen due to the profile being non-normalizable (here are [0, 30] kpc).
 For a disk of $\fgas=0.1$, $F \approx 0.5$, and a dark matter halo with $M = 1.5\times10^{12} \msun$, the two models return the following for the mass contained within 30 kpc of the galactic centre:
 \begin{itemize}
     \item This model: $1 \times 10^9 \msun$
