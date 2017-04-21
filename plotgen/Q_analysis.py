@@ -61,24 +61,9 @@ if __name__ == "__main__":
         fig.add_subplot(gs[2:, 2]),
     ]
 
-    nbins = len(axes[0].get_xticklabels())
-
-    axes[0].xaxis.tick_top()
-    axes[0].xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
-    axes[0].tick_params(labelleft='off')
-    axes[1].xaxis.tick_top()
-    axes[1].xaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
-    axes[1].tick_params(labelleft='off')
-    axes[2].xaxis.tick_top()
-    axes[2].yaxis.tick_right()
-    axes[3].tick_params(labelleft='off', labelbottom='off')
-    axes[4].tick_params(labelleft='off', labelbottom='off')
-    axes[5].yaxis.tick_right()
-    axes[5].yaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
-    axes[5].tick_params(labelbottom='off')
-    axes[6].yaxis.tick_right()
-    axes[6].yaxis.set_major_locator(MaxNLocator(nbins=nbins, prune='upper'))
-    axes[6].tick_params(labelbottom='off')
+    for ax in axes:
+        ax.xaxis.set_ticks([])
+        ax.yaxis.set_ticks([])
 
     cbar_ax = fig.add_subplot(gs[2, 0:2])
 
@@ -100,10 +85,12 @@ if __name__ == "__main__":
     cb.set_ticklabels(ticklabels)
 
 
-    axes[1].xaxis.set_label_position('top')
-    axes[1].set_xlabel("Distance from galactic center [kpc]")
-    axes[5].yaxis.set_label_position('right')
-    axes[5].set_ylabel("Distance from galactic center [kpc]")
+    # scalebar
+    
+    xs = np.arange(25, 35, 1)
+    ys = np.zeros_like(xs) + 35
+    axes[2].plot(xs, ys, color='white', linewidth=3, solid_capstyle='butt')
+    axes[2].annotate('10 kpc', fontsize=8, xy=(22, 30), color='white')
 
     pad = 0.1
     fig.subplots_adjust(left=0+pad, bottom=0+pad, right=1-pad, top=1-pad, wspace=0, hspace=0)
