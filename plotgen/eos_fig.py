@@ -55,6 +55,8 @@ ax.set_ylabel("$P$  [erg cm$^{-3}$]")
 ax.set_xlim([0.01, 10])
 ax.set_ylim([1e-14, 1e-10])
 
+fig.subplots_adjust(left=0.19, right=0.96, top=0.96, bottom=0.12)
+
 if "--showfig" in sys.argv:
     fig.show()
     input()
