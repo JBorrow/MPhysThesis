@@ -37,7 +37,7 @@ original = 10**(np.array(list(map(model, log_nh))))
 eag = np.array(list(map(EAGLE, values_of_nh)))
 my = np.array(list(map(my_model, values_of_nh)))
 
-fig, ax = plt.subplots(figsize=(0.6*6.3, 4))
+fig, ax = plt.subplots(figsize=(0.6*6.3, 3))
 
 ax.set_xscale('log')
 ax.set_yscale('log')
@@ -55,7 +55,7 @@ ax.set_ylabel("$P$  [erg cm$^{-3}$]")
 ax.set_xlim([0.01, 10])
 ax.set_ylim([1e-14, 1e-10])
 
-fig.subplots_adjust(left=0.19, right=0.96, top=0.96, bottom=0.12)
+fig.subplots_adjust(left=0.19, right=0.96, top=0.96, bottom=0.15)
 
 if "--showfig" in sys.argv:
     fig.show()
