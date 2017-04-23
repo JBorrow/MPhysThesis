@@ -1,0 +1,37 @@
+\subsection{Turbulent}
+
+The following derivation is for the turbulent Jeans' length for a cloud.
+Begin with the virial theorem,
+$$
+    KE = - \frac{1}{2} GPE~,
+$$
+with $KE$ the kinetic energy and $GPE$ the gravitational potential energy,
+$$
+\frac{1}{2} m (3 \sigma^2) \approx \frac{1}{2} \frac{G M m}{(1/2)R}~,
+$$
+with $m$ the mass of a test particle, $\sigma$ the 1D velocity dispersion of the particles (it is assumed that this is isotropic for this simple approximation), $M$ the mass of the cloud and $R$ the radius.
+When these are equal, the radius is the Jeans' length,
+$$
+L_{J, \sigma} = \frac{2 G M}{3 \sigma^2}~,
+$$
+and trading out the $M = (4/3) \rho L_{J, \sigma}^3$ with $\rho$ the local 3D density,
+$$
+L_{J, \sigma} = \sigma \sqrt{\frac{9}{8 G \rho}}~.
+$$
+
+\subsection{Thermal}
+
+The following derivation is for the turbulent Jeans' length for a cloud.
+Begin with the virial theorem,
+$$
+    KE = - \frac{1}{2} GPE~,
+$$
+with the KE coming from the thermal pressure and GPE coming from the gravitational potential of a spherical cloud,
+$$
+    \frac{3 M kT}{2 m} = \frac{3 G M^2}{5R}~,
+$$
+with $m$ the molecular mass, and $kT$ the thermal energy.
+Plugging in the above and taking $R = L_{J, T}$ here,
+$$
+    L_{J, T} = \sqrt{\frac{15 kT}{4\pi\rho G m}}~.
+$$
