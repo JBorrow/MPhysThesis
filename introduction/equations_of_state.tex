@@ -1,13 +1,13 @@
 An equation of state is a relation between functions of a state, such as temperature, pressure or density. 
-Here, an equation of state is used to describe the pressure of the interstellar medium as a function of density, and in particular the focus is on a \emph{polytropic} equation of state that can be described \citep{horedt_polytropes:_2004},
+Here, an equation of state is used to describe the pressure of the interstellar medium as a function of density, and in particular the focus is on a \emph{polytropic} equation of state that can be described as \citep{horedt_polytropes:_2004},
 \begin{equation}
 \label{eqn:polytrope}
-p \propto \rho_g ^ {\gamma_{eff}}~,
+p \propto \rho_g ^ {\gamma_\mathrm{eff}}~,
 \end{equation}
-where $p$ is the pressure, $\rho_g$ the density of gas and $\gamma_{eff}$ the polytropic index of the effective equation of state.
+where $p$ is the pressure, $\rho_g$ the density of gas and $\gamma_\mathrm{eff}$ the polytropic index of the effective equation of state.
 
-The equation of state $p \propto \rho^{4/3}$ was chosen in the EAGLE simulations \citep{schaye_eagle_2015} as a value of $\gamma_{eff} = 4/3$ ensures the jeans mass is independent of density.
-This choice ensures that the jeans mass is always resolved and prevents spurious clumping (a simulation artefact), but is not physically motivated directly by any actual gas properties.
+The equation of state $p \propto \rho^{4/3}$ was chosen in the EAGLE simulations \citep{schaye_eagle_2015} as a value of $\gamma_\mathrm{eff} = 4/3$ ensures the jeans mass is independent of density.
+This choice ensures that the jeans mass is always resolved and prevents spurious clumping (a simulation artefact), but it is not physically motivated directly by any actual gas properties.
 This equation of state is also enough to produce stable galaxies when normalized to $T = 8\times 10^3$ K at $n_H = 10^{-1}$ cm$^{-3}$ on the resolution scales considered in EAGLE (approximately 700 pc), when used with the extra physics in the EAGLE code.
-It would be useful to produce an equation of state that has similar features to this but also has a solid physical underpinning.
+The model presented below aims to produce an equation of state that has similar features to this but also has a solid physical underpinning.
 
