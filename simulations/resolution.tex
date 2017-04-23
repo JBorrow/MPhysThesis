@@ -6,16 +6,19 @@ These are calculated by fitting an exponential profile,
     \rho_x(z) \propto \mathrm{sech}^2\left(z/Z_x\right)
     \label{eqn:vertprofile}
 \end{equation}
-with $Z_x$ the scale height for component $x$. The results are shown in Figure \ref{fig:vheighthist}.
+with $Z_x$ the scale height for component $x$. Figure \ref{fig:vheighthist} shows this in detail.
 
-The differences between the two regimes can be understood through a simple \citet{jeans_stability_1902} analysis; the central regions have a considerably higher density and hence smaller Jeans length.
+The differences between the inner 0.5 kpc and outer region can be understood through a simple \citet{jeans_stability_1902} analysis; the central regions have a considerably higher density (see \S \ref{sec:anal_sdevo}, over 80\% of the particles in the galaxy reside here) and hence smaller Jeans' length.
 This, according to \citet{schaye_model-independent_2001}, implies that the scale height should be considerably smaller.
+The question of whether this is actually the case, though, still remains.
 It is possible to use the simulations as a test of the aforementioned work, by calculating the local 3D density ($\rho_g$), surface density ($\sg$), and Jeans' length ($L_J$).
 These values are presented in Table \ref{tab:schaye_test} and show that whilst the Jeans' length and actual scale height are roughly of order each other in low density regions, in the high density regions this approximation quickly becomes invalid.
 This appears to be resolution-independent, however the {\tt custom\_highres} model shows a considerably higher density central region due to the reduced softening length.
 
 Whilst the assertion from \citet{schaye_model-independent_2001} that $\sg \approx \rho_g L_J$ is tested somewhat by these data, the scale heights still remain representative of the modelled parameters, with the {\tt default} model aiming to represent all of the gas in the galaxy, from the cold neutral medium through to the hot ionized medium and the {\tt custom} model, in comparison, aiming only to represent the warm and cold media; hence the smaller scale height.
 The returned parameter values of $Z_g \approx 100$ and $1000$ pc for the {\tt custom} and {\tt default} models respectively are of order the Milky Way values of $\approx 200$ pc and $\approx 2000$ pc \citep{mckee_stars_2015}.
+It is still clear, however, that the pressure support from the supernova-driven model is not enough to reproduce the scale heights observed in real galaxies.
+More components of pressure from other processes are required to provide a more aggressive ($\gamma_\mathrm{eff} > 5/4$) dependence of pressure on density to remove the softening dependence and low scale heights that this model shows.
 
 \begin{table}
     \centering
