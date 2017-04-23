@@ -2,7 +2,7 @@
     \savebox{\graphicsbox}{\includegraphics[]{eos_fig.pdf}}
     \leavevmode\rlap{\usebox{\graphicsbox}}
     \begin{minipage}[b]{0.42\wd\graphicsbox}
-    {\caption{The equation of state (Equation \ref{eqn:eos}) is shown in solid green, with the EAGLE equation of state shown in dot-dash yellow. The equation of state that is shown in dotted blue was found to provide stable galaxies without extra physics by \citep{springel_cosmological_2003}. In grey dashed lines the various isothermal cutoffs (i.e. when star formation is quenched) for the various models are shown. The variation if cutoff density allows the supernova-driven equation of state to reproduce the one used in the EAGLE simulations well by giving a slightly higher normalization.}\label{fig:eos}}
+        {\caption{The equation of state (Equation \ref{eqn:eos}) is shown in solid green (for the values in \S \ref{sec:calibF}), with the EAGLE equation of state shown in dot-dash yellow. The equation of state that is shown in dotted blue was found to provide stable galaxies without extra physics by \citep{springel_cosmological_2003}. In grey dashed lines the various isothermal cutoffs (i.e. when star formation is quenched) for the various models are shown. The variation if cutoff density allows the supernova-driven equation of state to reproduce the one used in the EAGLE simulations well by giving a slightly higher normalization.}\label{fig:eos}}
 \end{minipage}\hspace*{1\wd\graphicsbox}
 \end{figure}
 
@@ -12,17 +12,22 @@ In this case, thermal pressure is neglected, and so the turbulent Jeans' length,
 \label{eqn:jeans}
 L_J = \rho_g^{-1/2} \sigma \sqrt{\frac{9}{8G}}~,
 \end{equation}
-where $\sigma$ dominates.
+where $\sigma$ dominates over the sound speed and is the local turbulent velocity dispersion and $\rho_g$ is the local 3D gas density.
 \citet{martizzi_supernova_2015} finds that the velocity dispersion injected by supernovae is
 \begin{equation}
 \label{eqn:martdisp}
 \sigma = 1.8 \left(\frac{f}{F}\right)^{{3/5}} G^{{2/5}} P_{fin}^{{1/5}} \fgas^{{-2/5}} \sg^{{1/5}}~.
 \end{equation}
-Using the epxression for the surface density above, and that $p = \rho_g \sigma^2$, the equation of state
+Using the expression for the surface density above, and that $p = \rho_g \sigma^2$, the equation of state
 \begin{equation}
 \label{eqn:eos}
 p = 4.5\left(\frac{f}{F}\right)^{{3/2}} G^{{3/4}} P_{fin}^{{1/2}} \fgas^{-1} \rho_\mathrm{g}^{{5/4}}~,
 \end{equation}
 for the gas in this model is found (see Appendix \ref{app:eos} for a more detailed derivation).
 Here, $f$ is a factor that takes into account momentum cancellation from supernovae shells colliding.
-The equation of state is plotted against various alternatives in Figure \ref{fig:eos}.
+The equation of state is plotted against various alternatives in Figure \ref{fig:eos}. A few remarks on this equation of state:
+\begin{itemize}
+    \item The inverse dependence of pressure on $\fgas$ correctly predicts that high-$z$ galaxies will have a lower level of support, leading to a high degree of clumping \citep{bournaud_long_2014}.
+    \item This model predicts a low pressure support compared to other equations of state that are designed to produce stable galaxies, such as \citet{springel_cosmological_2003}. It does, however, reproduce the EAGLE equation of state well.
+    \item Whilst there may initially appear to be a large number of extraneous factors, all of these ($f$, $F$, $P_{fin}$) are all fixed through either small scale simulations or observations, so there is a relatively small range of possible normalizations.
+\end{itemize}
